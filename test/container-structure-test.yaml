@@ -1,0 +1,27 @@
+containerRunOptions:
+  user: "jovyan"
+
+commandTests:
+  - name: "whoami"
+    command: "whoami"
+    expectedOutput: ["jovyan"]
+
+  - name: "user"
+    command: "id"
+    args: ["--user", "jovyan"]
+    expectedOutput: ["1000"]
+
+  - name: "groups"
+    command: "id"
+    args: ["--groups", "jovyan"]
+    expectedOutput: ["100"]
+
+  - name: "conda"
+    command: "conda"
+    args: ["info"]
+    expectedOutput: [".*active environment.*"]
+
+  - name: "aws"
+    command: "aws"
+    args: ["--version"]
+    expectedOutput: ["aws-cli/2.*"]
