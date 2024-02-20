@@ -9,33 +9,29 @@ on:
 permissions: {} # yamllint disable-line
 
 jobs:
-  yamllint:
-    name: YAML Lint
+  build:
+    name: Lint
     runs-on: ubuntu-latest
+
     permissions:
       contents: read
+      packages: read
+      # To report GitHub Actions status checks
+      statuses: write
+
     steps:
-      - name: Checkout
-        id: checkout
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          # super-linter needs the full git history to get the
+          # list of files that changed across commits
+          fetch-depth: 0
 
-      - name: Run yamllint
-        id: run_yamllint
-        uses: actionshub/yamllint@b772a30c3ba90c5f5aadfe94d8f3599e3a7099c8 # v1.8.2
-
-  markdownlint:
-    name: Markdown Lint
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    steps:
-      - name: Checkout
-        id: checkout
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
-
-      - name: Run mdl
-        id: run_mdl
-        uses: actionshub/markdownlint@6c82ff529253530dfbf75c37570876c52692835f # v3.1.4
+      - name: Super-linter
+        uses: super-linter/super-linter@v6.1.1
+        env:
+          # To report GitHub Actions status checks
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build-and-test:
     if: github.ref != 'main'
