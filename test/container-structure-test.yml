@@ -19,6 +19,11 @@ commandTests:
     args: ["--groups", "analyticalplatform"]
     expectedOutput: ["100"]
 
+  - name: "aws"
+    command: "aws"
+    args: ["--version"]
+    expectedOutput: ["aws-cli/2.*"]
+
   - name: "conda"
     command: "conda"
     args: ["info"]

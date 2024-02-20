@@ -17,6 +17,8 @@ ENV CONTAINER_USER="analyticalplatform" \
     MINICONDA_SHA265="35a58b8961e1187e7311b979968662c6223e86e1451191bed2e67a72b6bd0658" \
     PATH="/opt/conda/bin:${PATH}"
 
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 # User
 RUN groupadd \
       --gid ${CONTAINER_GID} \
