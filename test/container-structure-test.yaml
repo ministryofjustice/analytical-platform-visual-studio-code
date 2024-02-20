@@ -1,19 +1,22 @@
+---
+schemaVersion: 2.0.0
+
 containerRunOptions:
-  user: "jovyan"
+  user: "vscode"
 
 commandTests:
   - name: "whoami"
     command: "whoami"
-    expectedOutput: ["jovyan"]
+    expectedOutput: ["vscode"]
 
   - name: "user"
     command: "id"
-    args: ["--user", "jovyan"]
+    args: ["--user", "vscode"]
     expectedOutput: ["1000"]
 
   - name: "groups"
     command: "id"
-    args: ["--groups", "jovyan"]
+    args: ["--groups", "vscode"]
     expectedOutput: ["100"]
 
   - name: "conda"
