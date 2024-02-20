@@ -38,7 +38,7 @@ docker run -it --rm \
 
 ### Ubuntu
 
-Generally Dependabot does this, but the following command will return the digest
+Generally Dependabot does this, but the following command will return the digest:
 
 ```bash
 docker pull --platform linux/amd64 public.ecr.aws/ubuntu/ubuntu:22.04
@@ -47,7 +47,7 @@ docker image inspect --format='{{index .RepoDigests 0}}' public.ecr.aws/ubuntu/u
 
 ### APT Packages
 
-To find latest APT package versions, you can do the following
+To find latest APT package versions, you can run the following:
 
 ```bash
 docker run -it --rm --platform linux/amd64 public.ecr.aws/ubuntu/ubuntu:22.04
@@ -59,23 +59,28 @@ apt-cache policy ${PACKAGE} # for example curl, git or gpg
 
 ### Visual Studio Code
 
-Releases for Visual Studio Code are published on [GitHub](https://github.com/microsoft/vscode/releases), but we specifically want the Debian package version, to obtain this you can run the following
+Releases for Visual Studio Code are published on [GitHub](https://github.com/microsoft/vscode/releases), but we specifically want the Debian package version, to obtain this you can run the following:
 
 ```bash
 curl --silent https://packages.microsoft.com/repos/code/pool/main/c/code/ | grep $(curl --silent https://api.github.com/repos/microsoft/vscode/releases/latest | jq -r .tag_name) | grep amd64
 ```
 
-This will return a string like
+This will return a string like:
 
 ```bash
 <a href="code_1.86.2-1707854558_amd64.deb">code_1.86.2-1707854558_amd64.deb</a> ...
 ```
 
-From that, we want `1.86.2-1707854558`
+From that, we want `1.86.2-1707854558`.
 
 ### AWS CLI
 
-Releases for AWS CLI are maintained on [GitHub](https://raw.githubusercontent.com/aws/aws-cli/v2/CHANGELOG.rst)
+Releases for AWS CLI are maintained on [GitHub](https://raw.githubusercontent.com/aws/aws-cli/v2/CHANGELOG.rst).
+
+The GPG public key used for verification of AWS CLI is not hosted in a way where we can consume it programatically, instead its on [this](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-version.html) page
+under "(Optional) Verifying the integrity of your downloaded zip file".
+
+As of 20/02/24, the GPG public key used for verifying AWS CLI expires 26/07/24, but there is an [issue](https://github.com/aws/aws-cli/issues/6230) to track it.
 
 ### Miniconda
 
