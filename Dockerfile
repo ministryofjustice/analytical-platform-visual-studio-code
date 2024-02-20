@@ -39,7 +39,7 @@ RUN apt-get update --yes \
          "python3-pip=22.0.2+dfsg-1ubuntu0.4" \
          "unzip=6.0-26ubuntu3.2" \
     && apt-get clean --yes \
-    && rm --force --recursive /var/lib/apt/lists/* 
+    && rm --force --recursive /var/lib/apt/lists/*
 
 # Visaual Studio Code
 RUN curl --location --fail-with-body \
