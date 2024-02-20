@@ -1,0 +1,45 @@
+---
+name: Publish
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions: {}  # yamllint disable-line
+
+jobs:
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+      packages: write
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        flavour:
+          - "visual-studio-code"
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+
+      - name: Log in to GitHub Container Registry
+        id: login_ghcr
+        uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d # v3.0.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and Push
+        id: build_and_push
+        uses: docker/build-push-action@4a13e500e55cf31b7a5d59a38ab2040ab0f42f56 # v5.1.0
+        with:
+          context: ${{ matrix.flavour }}
+          file: Dockerfile
+          push: true
+          tags: ghcr.io/ministryofjustice/analytical-platform-${{ matrix.flavour }}:${{ github.ref_name }}
