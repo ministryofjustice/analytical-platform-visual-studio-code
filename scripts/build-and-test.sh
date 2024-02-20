@@ -12,13 +12,11 @@ fi
 
 docker build ${PLATFORM_FLAG} --file Dockerfile --tag "${IMAGE_TAG}" .
 
-if [[ -f "${IMAGE}/test/container-structure-test.yml" ]]; then
-  echo "Running container structure test for [ ${IMAGE_TAG} ]"
+echo "Running container structure test for [ ${IMAGE_TAG} ]"
 
-  docker run --rm ${PLATFORM_FLAG} \
-    --volume /var/run/docker.sock:/var/run/docker.sock \
-    --volume "${PWD}:/workspace" \
-    --workdir /workspace \
-    "${CONTAINER_STRUCTURE_TEST_IMAGE}" \
-    test --image "${IMAGE_TAG}" --config "/workspace/test/container-structure-test.yml"
-fi
+docker run --rm ${PLATFORM_FLAG} \
+  --volume /var/run/docker.sock:/var/run/docker.sock \
+  --volume "${PWD}:/workspace" \
+  --workdir /workspace \
+  "${CONTAINER_STRUCTURE_TEST_IMAGE}" \
+  test --image "${IMAGE_TAG}" --config "/workspace/test/container-structure-test.yml"
