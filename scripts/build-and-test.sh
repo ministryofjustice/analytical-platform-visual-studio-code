@@ -8,12 +8,14 @@ if [[ "${REMOTE_CONTAINERS}" ]] && [[ "$(uname -m)" == "aarch64" ]]; then
   echo "(⚠) This script builds linux/amd64 images which might take a long time or even fail."
   export PLATFORM_FLAG="--platform linux/amd64"
 fi
-# shellcheck disable=SC2086 special case for PLATFORM_FLAG
+# shellcheck disable=SC2086
+# special case for PLATFORM_FLAG as it can't parse double quotes
 docker build ${PLATFORM_FLAG} --file Dockerfile --tag "${IMAGE_TAG}" .
 
 echo "Running container structure test for [ ${IMAGE_TAG} ]"
 
-# shellcheck disable=SC2086 special case for PLATFORM_FLAG
+# shellcheck disable=SC2086
+# special case for PLATFORM_FLAG as it can't parse double quotes
 docker run --rm ${PLATFORM_FLAG} \
   --volume /var/run/docker.sock:/var/run/docker.sock \
   --volume "${PWD}:/workspace" \
