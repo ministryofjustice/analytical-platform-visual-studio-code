@@ -4,13 +4,79 @@
 
 This repository contains the Visual Studio Code container image for use in the Analytical Platform.
 
-This repository is managed in Terraform [here](https://github.com/ministryofjustice/data-platform/blob/2892887765f695e7690186dc33a989097fbdc59a/terraform/github/analytical-platform-repositories.tf#L286).
+This repository is managed in Terraform [here](https://github.com/ministryofjustice/data-platform/blob/main/terraform/github/analytical-platform-repositories.tf#L286).
 
 ## Features
 
-The base container image is [Ubuntu](https://hub.docker.com/_/ubuntu), as such the container comes with all of the built-in Ubuntu tools.
+The base container image is [Ubuntu 22.04 LTS](https://gallery.ecr.aws/ubuntu/ubuntu).
 
 Additionally the following tools are installed:
 
 - [AWS CLI](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/index.html)
 - [Miniconda](https://docs.anaconda.com/free/miniconda/index.html)
+
+## Running Locally
+
+### Build
+
+```bash
+docker build --platform linux/amd64 --file Dockerfile --tag analytical-platform.service.justice.gov.uk/code:local .
+```
+
+### Run
+
+```bash
+docker run -it --rm \
+  --platform linux/amd64 \
+  --publish 8080:8080 \
+  --hostname code \
+  --name analytical-platform-code \
+  analytical-platform.service.justice.gov.uk/code:local
+```
+
+## Versions
+
+### Ubuntu
+
+Generally Dependabot does this, but the following command will return the digest
+
+```bash
+docker pull --platform linux/amd64 public.ecr.aws/ubuntu/ubuntu:22.04
+docker image inspect --format='{{index .RepoDigests 0}}' public.ecr.aws/ubuntu/ubuntu:22.04
+```
+
+### APT Packages
+
+To find latest APT package versions, you can do the following
+
+```bash
+docker run -it --rm --platform linux/amd64 public.ecr.aws/ubuntu/ubuntu:22.04
+
+apt-get update
+
+apt-cache policy ${PACKAGE} # for example curl, git or gpg
+```
+
+### Visual Studio Code
+
+Releases for Visual Studio Code are published on [GitHub](https://github.com/microsoft/vscode/releases), but we specifically want the Debian package version, to obtain this you can run the following
+
+```bash
+curl --silent https://packages.microsoft.com/repos/code/pool/main/c/code/ | grep $(curl --silent https://api.github.com/repos/microsoft/vscode/releases/latest | jq -r .tag_name) | grep amd64
+```
+
+This will return a string like
+
+```bash
+<a href="code_1.86.2-1707854558_amd64.deb">code_1.86.2-1707854558_amd64.deb</a> ...
+```
+
+From that, we want `1.86.2-1707854558`
+
+### AWS CLI
+
+Releases for AWS CLI are maintained on [GitHub](https://raw.githubusercontent.com/aws/aws-cli/v2/CHANGELOG.rst)
+
+### Miniconda
+
+Releases for Miniconda are maintained on [docs.anaconda.com](https://docs.anaconda.com/free/miniconda/miniconda-release-notes/), from there we can use [repo.anaconda.com](https://repo.anaconda.com/miniconda/) to determine the artefact name and SHA256 based on a version. We currently use `py310`, `Linux` and `x86_64`variant.
