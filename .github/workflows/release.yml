@@ -9,8 +9,8 @@ on:
 permissions: {}
 
 jobs:
-  publish:
-    name: Publish
+  release:
+    name: Release
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -51,5 +51,5 @@ jobs:
         run: |
           cosign verify \
           --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
-          --certificate-identity=https://github.com/ministryofjustice/analytical-platform-visual-studio-code/.github/workflows/publish.yml@refs/tags/${{ github.ref_name }} \
+          --certificate-identity=https://github.com/ministryofjustice/analytical-platform-visual-studio-code/.github/workflows/release.yml@refs/tags/${{ github.ref_name }} \
           ghcr.io/ministryofjustice/analytical-platform-visual-studio-code@${{ steps.build_and_push.outputs.digest }}
