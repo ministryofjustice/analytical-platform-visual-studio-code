@@ -1,5 +1,5 @@
 ---
-name: Test and Build
+name: Build and Test
 
 on:
   pull_request:
@@ -39,12 +39,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-    strategy:
-      fail-fast: false
-      max-parallel: 3
-      matrix:
-        flavour:
-          - "visual-studio-code"
     steps:
       - name: Checkout
         id: checkout
@@ -54,4 +48,4 @@ jobs:
         id: build_and_test
         shell: bash
         run: |
-          bash scripts/build-and-test.sh "${{ matrix.flavour }}"
+          bash scripts/build-and-test.sh
