@@ -78,7 +78,7 @@ From that, we want `1.86.2-1707854558`.
 Releases for AWS CLI are maintained on [GitHub](https://raw.githubusercontent.com/aws/aws-cli/v2/CHANGELOG.rst).
 
 The GPG public key used for verification of AWS CLI is not hosted in a way where we can consume it programatically, instead its on [this](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-version.html) page
-under "(Optional) Verifying the integrity of your downloaded zip file".
+under "(Optional) Verifying the integrity of your downloaded ZIP file".
 
 As of 20/02/24, the GPG public key used for verifying AWS CLI expires 26/07/24, but there is an [issue](https://github.com/aws/aws-cli/issues/6230) to track it.
 
