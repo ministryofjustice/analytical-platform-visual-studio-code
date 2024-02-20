@@ -2,7 +2,7 @@
 FROM ubuntu:latest
 # Create User
 RUN useradd --create-home --shell /bin/bash vscode
-# Set the working directory inside the container
+# Set the working directory inside the container&& \
 WORKDIR /vscode
 # Install any necessary dependencies
 RUN apt-get update
@@ -17,10 +17,15 @@ RUN apt install -y apt-transport-https && \
     apt update && \
     apt install -y code
 
+ENV AWS_CLI_VERSSION="2.15.21"
+COPY ./public.key public-key-file-name
+
 # Install AWS cli
-RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
-    unzip awscliv2.zip && \
-    ./aws/install
+RUN curl -o awscli.tar.gz "https://awscli.amazonaws.com/awscli-${AWS_CLI_VERSSION}.tar.gz" && \
+    gpg --import public-key-file-name && \
+    curl -o awscliv2.sig "https://awscli.amazonaws.com/awscli-${AWS_CLI_VERSSION}.tar.gz.sig"  && \
+    gpg --verify awscliv2.sig awscli.tar.gz && \
+    tar -xzf awscli.tar.gz 
 
 ENV MINICONDA_SHA="35a58b8961e1187e7311b979968662c6223e86e1451191bed2e67a72b6bd0658"
 ENV MINICONDA_VERSION="23.11.0-2"
@@ -36,5 +41,5 @@ RUN mkdir -p /opt/miniconda3 && \
 ENV PATH="${PATH}:/opt/miniconda3/bin"
 
 # Switch user
-USER vscode
+#USER vscode
 ENTRYPOINT ["code", "serve-web", "--host", "0.0.0.0", "--without-connection-token"]
