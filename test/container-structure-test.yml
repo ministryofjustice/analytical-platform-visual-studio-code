@@ -5,6 +5,11 @@ containerRunOptions:
   user: "analyticalplatform"
 
 commandTests:
+  - name: "ubuntu"
+    command: "grep"
+    args: ["DISTRIB_RELEASE", "/etc/lsb-release"]
+    expectedOutput: ["DISTRIB_RELEASE=22.04"]
+
   - name: "whoami"
     command: "whoami"
     expectedOutput: ["analyticalplatform"]
