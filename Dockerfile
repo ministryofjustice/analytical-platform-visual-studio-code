@@ -43,7 +43,20 @@ RUN apt-get update --yes \
     && apt-get clean --yes \
     && rm --force --recursive /var/lib/apt/lists/*
 
-# Visaual Studio Code
+COPY src/opt/visual-studio-code/first-run-notice.txt /opt/visual-studio-code/first-run-notice.txt
+
+RUN cat <<EOF >> /home/analyticalplatform/.bashrc
+
+if [ -t 1 ] && [[ "\${TERM_PROGRAM}" = "vscode" ]] && [ ! -f "/opt/visual-studio-code/first-run-notice-already-displayed" ]; then
+    cat /opt/visual-studio-code/first-run-notice.txt
+    # Mark first run notice as displayed after 10s to avoid problems with fast terminal refreshes hiding it
+    mkdir -p "~/.visual-studio-code"
+    ((sleep 10s; touch "~/.visual-studio-code/first-run-notice-already-displayed") &)
+fi
+
+EOF
+
+# Visual Studio Code
 RUN curl --location --fail-with-body \
       "https://packages.microsoft.com/keys/microsoft.asc" \
       --output microsoft.asc \
