@@ -47,6 +47,7 @@ COPY src/opt/visual-studio-code/first-run-notice.txt /opt/visual-studio-code/fir
 
 RUN cat <<EOF >> /home/analyticalplatform/.bashrc
 
+# This is a first run notice for Visual Studio Code
 if [ -t 1 ] && [[ "\${TERM_PROGRAM}" = "vscode" ]] && [ ! -f "/opt/visual-studio-code/first-run-notice-already-displayed" ]; then
     cat /opt/visual-studio-code/first-run-notice.txt
     # Mark first run notice as displayed after 10s to avoid problems with fast terminal refreshes hiding it
