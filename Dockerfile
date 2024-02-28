@@ -1,4 +1,4 @@
-FROM public.ecr.aws/ubuntu/ubuntu@sha256:98bdc90ad3fc207b7d0a60ce166b62d410c741d35b17b615404bc060b9da989f
+FROM public.ecr.aws/ubuntu/ubuntu@sha256:722b3bddfe96b95441f626cf94974d79213090ecbd16954f71d7c080fb413561
 
 LABEL org.opencontainers.image.vendor="Ministry of Justice" \
       org.opencontainers.image.authors="Analytical Platform (analytical-platform@digital.justice.gov.uk)" \
@@ -12,7 +12,7 @@ ENV CONTAINER_USER="analyticalplatform" \
     CONTAINER_GID="1000" \
     DEBIAN_FRONTEND="noninteractive" \
     VISUAL_STUDIO_CODE_VERSION="1.86.2-1707854558" \
-    AWS_CLI_VERSION="2.15.21" \
+    AWS_CLI_VERSION="2.15.23" \
     MINICONDA_VERSION="23.11.0-2" \
     MINICONDA_SHA265="35a58b8961e1187e7311b979968662c6223e86e1451191bed2e67a72b6bd0658" \
     PATH="/opt/conda/bin:${PATH}"
