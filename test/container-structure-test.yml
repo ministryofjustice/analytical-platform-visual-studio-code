@@ -38,3 +38,8 @@ commandTests:
     command: "pip"
     args: ["--version"]
     expectedOutput: ["pip.*"]
+
+fileContentTests:
+  - name: "bashrc first-run-notice"
+    path: "/home/analyticalplatform/.bashrc"
+    expectedContents: ["# This is a first run notice for Visual Studio Code"]
