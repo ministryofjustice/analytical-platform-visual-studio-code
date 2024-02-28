@@ -20,7 +20,7 @@ Additionally the following tools are installed:
 ### Build
 
 ```bash
-docker build --platform linux/amd64 --file Dockerfile --tag analytical-platform.service.justice.gov.uk/code:local .
+docker build --platform linux/amd64 --file Dockerfile --tag analytical-platform.service.justice.gov.uk/visual-studio-code:local .
 ```
 
 ### Run
@@ -31,7 +31,7 @@ docker run -it --rm \
   --publish 8080:8080 \
   --hostname code \
   --name analytical-platform-code \
-  analytical-platform.service.justice.gov.uk/code:local
+  analytical-platform.service.justice.gov.uk/visual-studio-code:local
 ```
 
 ## Versions
