@@ -11,10 +11,10 @@ ENV CONTAINER_USER="analyticalplatform" \
     CONTAINER_GROUP="analyticalplatform" \
     CONTAINER_GID="1000" \
     DEBIAN_FRONTEND="noninteractive" \
-    VISUAL_STUDIO_CODE_VERSION="1.86.2-1707854558" \
-    AWS_CLI_VERSION="2.15.23" \
-    MINICONDA_VERSION="23.11.0-2" \
-    MINICONDA_SHA265="35a58b8961e1187e7311b979968662c6223e86e1451191bed2e67a72b6bd0658" \
+    VISUAL_STUDIO_CODE_VERSION="1.87.0-1709078641" \
+    AWS_CLI_VERSION="2.15.25" \
+    MINICONDA_VERSION="24.1.2-0" \
+    MINICONDA_SHA265="8eb5999c2f7ac6189690d95ae5ec911032fa6697ae4b34eb3235802086566d78" \
     PATH="/opt/conda/bin:${PATH}"
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -37,6 +37,7 @@ RUN apt-get update --yes \
          "curl=7.81.0-1ubuntu1.15" \
          "git=1:2.34.1-1ubuntu1.10" \
          "gpg=2.2.27-3ubuntu2.1" \
+         "jq=1.6-2.1ubuntu3" \
          "python3.10=3.10.12-1~22.04.3" \
          "python3-pip=22.0.2+dfsg-1ubuntu0.4" \
          "unzip=6.0-26ubuntu3.2" \
