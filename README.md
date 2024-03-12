@@ -34,6 +34,10 @@ docker run -it --rm \
   analytical-platform.service.justice.gov.uk/visual-studio-code:local
 ```
 
+### Use
+
+Open a browser <https://localhost:8080/?folder=/home/analyticalplatform/workspace>
+
 ## Versions
 
 ### Ubuntu
