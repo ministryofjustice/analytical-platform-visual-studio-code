@@ -43,10 +43,16 @@ RUN apt-get update --yes \
          "python3-pip=22.0.2+dfsg-1ubuntu0.4" \
          "unzip=6.0-26ubuntu3.2" \
     && apt-get clean --yes \
-    && rm --force --recursive /var/lib/apt/lists/*
+    && rm --force --recursive /var/lib/apt/lists/* \
+    && install --directory --owner ${CONTAINER_USER} --group ${CONTAINER_GROUP} --mode 0755 /opt/visual-studio-code
 
+# Backup Bash configuration
+RUN cp /home/analyticalplatform/.bashrc /opt/visual-studio-code/.bashrc \
+    && cp /home/analyticalplatform/.bash_logout /opt/visual-studio-code/.bash_logout \
+    && cp /home/analyticalplatform/.profile /opt/visual-studio-code/.profile
+
+# First run notice
 COPY src/opt/visual-studio-code/first-run-notice.txt /opt/visual-studio-code/first-run-notice.txt
-
 RUN cat <<EOF >> /etc/bash.bashrc
 
 # This is a first run notice for Visual Studio Code
