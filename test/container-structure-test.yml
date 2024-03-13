@@ -41,5 +41,5 @@ commandTests:
 
 fileContentTests:
   - name: "bashrc first-run-notice"
-    path: "/home/analyticalplatform/.bashrc"
+    path: "/etc/bash.bashrc"
     expectedContents: ["# This is a first run notice for Visual Studio Code"]

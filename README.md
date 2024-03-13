@@ -36,7 +36,7 @@ docker run -it --rm \
 
 ### Use
 
-Open a browser <https://localhost:8080/?folder=/home/analyticalplatform/workspace>
+Open a browser <http://localhost:8080/?folder=/home/analyticalplatform/workspace>
 
 ## Versions
 

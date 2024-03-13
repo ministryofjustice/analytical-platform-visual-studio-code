@@ -11,8 +11,8 @@ ENV CONTAINER_USER="analyticalplatform" \
     CONTAINER_GROUP="analyticalplatform" \
     CONTAINER_GID="1000" \
     DEBIAN_FRONTEND="noninteractive" \
-    VISUAL_STUDIO_CODE_VERSION="1.87.1-1709685762" \
-    AWS_CLI_VERSION="2.15.27" \
+    VISUAL_STUDIO_CODE_VERSION="1.87.2-1709912201" \
+    AWS_CLI_VERSION="2.15.28" \
     MINICONDA_VERSION="24.1.2-0" \
     MINICONDA_SHA265="8eb5999c2f7ac6189690d95ae5ec911032fa6697ae4b34eb3235802086566d78" \
     PATH="/opt/conda/bin:${PATH}"
@@ -47,10 +47,10 @@ RUN apt-get update --yes \
 
 COPY src/opt/visual-studio-code/first-run-notice.txt /opt/visual-studio-code/first-run-notice.txt
 
-RUN cat <<EOF >> /home/analyticalplatform/.bashrc
+RUN cat <<EOF >> /etc/bash.bashrc
 
 # This is a first run notice for Visual Studio Code
-if [ -t 1 ] && [[ "\${TERM_PROGRAM}" = "vscode" ]] && [ ! -f "/home/analyticalplatform/.vscode/first-run-notice-already-displayed" ]; then
+if [[ -t 1 ]] && [[ "\${TERM_PROGRAM}" = "vscode" ]] && [[ ! -f "/home/analyticalplatform/.vscode/first-run-notice-already-displayed" ]]; then
     cat /opt/visual-studio-code/first-run-notice.txt
     # Mark first run notice as displayed after 10s to avoid problems with fast terminal refreshes hiding it
     mkdir --parents "/home/analyticalplatform/.vscode"
