@@ -16,6 +16,7 @@ ENV CONTAINER_USER="analyticalplatform" \
     MINICONDA_VERSION="24.1.2-0" \
     MINICONDA_SHA256="8eb5999c2f7ac6189690d95ae5ec911032fa6697ae4b34eb3235802086566d78" \
     OLLAMA_VERSION="0.1.29" \
+    OLLAMA_SHA256="332911072ca8bc2d41323582eed4d42205074b7ba82e7008d4e75761a1260b0e" \
     PATH="/opt/conda/bin:${PATH}"
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -108,7 +109,9 @@ COPY --chown=nobody:nobody --chmod=0755 src/usr/local/bin/healthcheck.sh /usr/lo
 RUN curl --location --fail-with-body \
         "https://github.com/ollama/ollama/releases/download/v${OLLAMA_VERSION}/ollama-linux-amd64" \
         --output "ollama" \
-    && install --owner=root --group=root --mode=775 ollama /usr/local/bin/ollama
+    && echo "${OLLAMA_SHA256} ollama" | sha256sum --check \
+    && install --owner=root --group=root --mode=775 ollama /usr/local/bin/ollama \
+    && rm --force ollama
 
 USER ${CONTAINER_USER}
 
