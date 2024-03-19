@@ -42,7 +42,7 @@ commandTests:
   - name: "ollama"
     command: "ollama"
     args: ["--version"]
-    expectedOutput: ["*version*"]
+    expectedOutput: ["ollama version 0.1.29"]
 
 fileContentTests:
   - name: "bashrc first-run-notice"
