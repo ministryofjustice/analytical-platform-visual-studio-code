@@ -39,6 +39,11 @@ commandTests:
     args: ["--version"]
     expectedOutput: ["pip.*"]
 
+  - name: "ollama"
+    command: "ollama"
+    args: ["--version"]
+    expectedOutput: ["*version*"]
+
 fileContentTests:
   - name: "bashrc first-run-notice"
     path: "/etc/bash.bashrc"

@@ -14,7 +14,8 @@ ENV CONTAINER_USER="analyticalplatform" \
     VISUAL_STUDIO_CODE_VERSION="1.87.2-1709912201" \
     AWS_CLI_VERSION="2.15.28" \
     MINICONDA_VERSION="24.1.2-0" \
-    MINICONDA_SHA265="8eb5999c2f7ac6189690d95ae5ec911032fa6697ae4b34eb3235802086566d78" \
+    MINICONDA_SHA256="8eb5999c2f7ac6189690d95ae5ec911032fa6697ae4b34eb3235802086566d78" \
+    OLLAMA_VERSION="0.1.29" \
     PATH="/opt/conda/bin:${PATH}"
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -96,12 +97,18 @@ RUN gpg --import /opt/aws-cli/aws-cli@amazon.com.asc \
 RUN curl --location --fail-with-body \
          "https://repo.anaconda.com/miniconda/Miniconda3-py310_${MINICONDA_VERSION}-Linux-x86_64.sh" \
          --output "miniconda.sh" \
-    && echo "${MINICONDA_SHA265} miniconda.sh" | sha256sum --check \
+    && echo "${MINICONDA_SHA256} miniconda.sh" | sha256sum --check \
     && bash miniconda.sh -b -p /opt/conda \
     && rm --force miniconda.sh
 
 COPY --chown=nobody:nobody --chmod=0755 src/usr/local/bin/entrypoint.sh /usr/local/bin/entrypoint.sh
 COPY --chown=nobody:nobody --chmod=0755 src/usr/local/bin/healthcheck.sh /usr/local/bin/healthcheck.sh
+
+# Ollama
+RUN curl --location --fail-with-body \
+        "https://github.com/ollama/ollama/releases/download/v${OLLAMA_VERSION}/ollama-linux-amd64" \
+        --output "ollama" \
+    && install --owner=root --group=root --mode=775 ollama /usr/local/bin/ollama
 
 USER ${CONTAINER_USER}
 
