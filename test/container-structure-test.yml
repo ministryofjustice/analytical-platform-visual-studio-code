@@ -41,7 +41,10 @@ commandTests:
 
   - name: "ollama"
     command: "ollama"
-    args: ["--version"]
+    #args: ["--version"]
+    args:
+      - "serve"
+      - "--version"
     expectedOutput: ["ollama version 0.1.29"]
 
 fileContentTests:
