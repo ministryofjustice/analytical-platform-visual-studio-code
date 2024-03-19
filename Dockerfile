@@ -42,6 +42,7 @@ RUN apt-get update --yes \
          "python3.10=3.10.12-1~22.04.3" \
          "python3-pip=22.0.2+dfsg-1ubuntu0.4" \
          "unzip=6.0-26ubuntu3.2" \
+         "dotnet-sdk-8.0" \
     && apt-get clean --yes \
     && rm --force --recursive /var/lib/apt/lists/* \
     && install --directory --owner ${CONTAINER_USER} --group ${CONTAINER_GROUP} --mode 0755 /opt/visual-studio-code
