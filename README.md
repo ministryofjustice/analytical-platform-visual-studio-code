@@ -95,5 +95,5 @@ Releases for Miniconda are maintained on [docs.anaconda.com](https://docs.anacon
 
 Ollama is a tool that allows you to run open-source large language models (LLMs) locally on your machine. It supports a variety of models, including Llama 2, Code Llama, and others.
 
-Ollama don't currently provide SHA256 checksum for their installation file. For now, a checksum was acquired by runing the following comand locally:
+Ollama don't currently provide SHA256 checksum for their installation file. For now, a checksum was acquired by running the following command locally:
 `curl --location --fail-with-body "https://github.com/ollama/ollama/releases/download/v0.1.29/ollama-linux-amd64" | sha256sum`
