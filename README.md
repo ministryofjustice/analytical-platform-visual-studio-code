@@ -14,6 +14,7 @@ Additionally the following tools are installed:
 
 - [AWS CLI](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/index.html)
 - [Miniconda](https://docs.anaconda.com/free/miniconda/index.html)
+- [Ollama](https://ollama.com/)
 
 ## Running Locally
 
@@ -89,3 +90,11 @@ As of 20/02/24, the GPG public key used for verifying AWS CLI expires 26/07/24, 
 ### Miniconda
 
 Releases for Miniconda are maintained on [docs.anaconda.com](https://docs.anaconda.com/free/miniconda/miniconda-release-notes/), from there we can use [repo.anaconda.com](https://repo.anaconda.com/miniconda/) to determine the artefact name and SHA256 based on a version. We currently use `py310`, `Linux` and `x86_64`variant.
+
+
+### Ollama
+
+Ollama is a tool that allows you to run open-source large language models (LLMs) locally on your machine. It supports a variety of models, including Llama 2, Code Llama, and others.
+
+Ollama don't currently provide SHA256 checksum for their installation file. For now, a checksum was acquired by running the following command locally:
+`curl --location --fail-with-body "https://github.com/ollama/ollama/releases/download/v0.1.29/ollama-linux-amd64" | sha256sum`
