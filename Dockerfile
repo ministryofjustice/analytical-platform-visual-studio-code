@@ -13,6 +13,7 @@ ENV CONTAINER_USER="analyticalplatform" \
     DEBIAN_FRONTEND="noninteractive" \
     VISUAL_STUDIO_CODE_VERSION="1.87.2-1709912201" \
     AWS_CLI_VERSION="2.15.28" \
+    CORRETTO_VERSION="1:21.0.2.14-1" \
     MINICONDA_VERSION="24.1.2-0" \
     MINICONDA_SHA256="8eb5999c2f7ac6189690d95ae5ec911032fa6697ae4b34eb3235802086566d78" \
     OLLAMA_VERSION="0.1.29" \
@@ -93,6 +94,16 @@ RUN gpg --import /opt/aws-cli/aws-cli@amazon.com.asc \
     && unzip awscliv2.zip \
     && ./aws/install \
     && rm --force --recursive awscliv2.sig awscliv2.zip aws
+
+# Amazon Corretto
+RUN curl --location --fail-with-body \
+      "https://apt.corretto.aws/corretto.key" \
+      --output corretto.key \
+    && cat corretto.key | gpg --dearmor --output /usr/share/keyrings/corretto-keyring.gpg \
+    && echo "deb [signed-by=/usr/share/keyrings/corretto-keyring.gpg] https://apt.corretto.aws stable main" | tee /etc/apt/sources.list.d/corretto.list \
+    && apt-get update --yes \
+    && apt-get install --yes \
+         "java-21-amazon-corretto-jdk=${CORRETTO_VERSION}"
 
 # Miniconda
 RUN curl --location --fail-with-body \

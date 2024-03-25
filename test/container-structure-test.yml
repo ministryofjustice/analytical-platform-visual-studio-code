@@ -44,6 +44,12 @@ commandTests:
     args: ["--version"]
     expectedOutput: [".*version.*"]
 
+  # "java -version" doesn't print to stdout, only stderr
+  - name: "corretto"
+    command: "java"
+    args: ["-version"]
+    exitCode: 0
+
 fileContentTests:
   - name: "bashrc first-run-notice"
     path: "/etc/bash.bashrc"
