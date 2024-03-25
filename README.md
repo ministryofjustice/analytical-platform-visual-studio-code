@@ -13,6 +13,7 @@ The base container image is [Ubuntu 22.04 LTS](https://gallery.ecr.aws/ubuntu/ub
 Additionally the following tools are installed:
 
 - [AWS CLI](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/index.html)
+- [Amazon Corretto](https://aws.amazon.com/corretto)
 - [Miniconda](https://docs.anaconda.com/free/miniconda/index.html)
 - [Ollama](https://ollama.com/)
 
