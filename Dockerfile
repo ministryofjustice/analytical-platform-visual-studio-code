@@ -12,10 +12,11 @@ ENV CONTAINER_USER="analyticalplatform" \
     CONTAINER_GID="1000" \
     DEBIAN_FRONTEND="noninteractive" \
     VISUAL_STUDIO_CODE_VERSION="1.87.2-1709912201" \
-    AWS_CLI_VERSION="2.15.28" \
+    AWS_CLI_VERSION="2.15.32" \
     CORRETTO_VERSION="1:21.0.2.14-1" \
     MINICONDA_VERSION="24.1.2-0" \
     MINICONDA_SHA256="8eb5999c2f7ac6189690d95ae5ec911032fa6697ae4b34eb3235802086566d78" \
+    DOTNET_SDK_VERSION="8.0.202-1" \
     OLLAMA_VERSION="0.1.29" \
     OLLAMA_SHA256="332911072ca8bc2d41323582eed4d42205074b7ba82e7008d4e75761a1260b0e" \
     PATH="/opt/conda/bin:${PATH}"
@@ -37,6 +38,7 @@ RUN groupadd \
 RUN apt-get update --yes \
     && apt-get install --yes \
          "apt-transport-https=2.4.11" \
+         "ca-certificates=20230311ubuntu0.22.04.1" \
          "curl=7.81.0-1ubuntu1.15" \
          "git=1:2.34.1-1ubuntu1.10" \
          "gpg=2.2.27-3ubuntu2.1" \
@@ -72,7 +74,7 @@ EOF
 RUN curl --location --fail-with-body \
       "https://packages.microsoft.com/keys/microsoft.asc" \
       --output microsoft.asc \
-    && cat microsoft.asc | gpg --dearmor > packages.microsoft.gpg \
+    && cat microsoft.asc | gpg --dearmor --output packages.microsoft.gpg \
     && install -D --owner root --group root --mode 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg \
     && echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list \
     && apt-get update --yes \
@@ -99,30 +101,45 @@ RUN gpg --import /opt/aws-cli/aws-cli@amazon.com.asc \
 RUN curl --location --fail-with-body \
       "https://apt.corretto.aws/corretto.key" \
       --output corretto.key \
-    && cat corretto.key | gpg --dearmor --output /usr/share/keyrings/corretto-keyring.gpg \
-    && echo "deb [signed-by=/usr/share/keyrings/corretto-keyring.gpg] https://apt.corretto.aws stable main" | tee /etc/apt/sources.list.d/corretto.list \
+    && cat corretto.key | gpg --dearmor --output corretto-keyring.gpg \
+    && install -D --owner root --group root --mode 644 corretto-keyring.gpg /etc/apt/keyrings/corretto-keyring.gpg \
+    && echo "deb [signed-by=/etc/apt/keyrings/corretto-keyring.gpg] https://apt.corretto.aws stable main" > /etc/apt/sources.list.d/corretto.list \
     && apt-get update --yes \
     && apt-get install --yes \
-         "java-21-amazon-corretto-jdk=${CORRETTO_VERSION}"
+         "java-21-amazon-corretto-jdk=${CORRETTO_VERSION}" \
+    && apt-get clean --yes \
+    && rm --force --recursive /var/lib/apt/lists/*
 
 # Miniconda
 RUN curl --location --fail-with-body \
-         "https://repo.anaconda.com/miniconda/Miniconda3-py310_${MINICONDA_VERSION}-Linux-x86_64.sh" \
-         --output "miniconda.sh" \
+      "https://repo.anaconda.com/miniconda/Miniconda3-py310_${MINICONDA_VERSION}-Linux-x86_64.sh" \
+      --output "miniconda.sh" \
     && echo "${MINICONDA_SHA256} miniconda.sh" | sha256sum --check \
     && bash miniconda.sh -b -p /opt/conda \
     && rm --force miniconda.sh
 
-COPY --chown=nobody:nobody --chmod=0755 src/usr/local/bin/entrypoint.sh /usr/local/bin/entrypoint.sh
-COPY --chown=nobody:nobody --chmod=0755 src/usr/local/bin/healthcheck.sh /usr/local/bin/healthcheck.sh
+# .NET SDK
+RUN curl --location --fail-with-body \
+      "https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb" \
+      --output "packages-microsoft-prod.deb" \
+    && apt-get install --yes ./packages-microsoft-prod.deb \
+    && apt-get update --yes \
+    && apt-get install --yes \
+         "dotnet-sdk-8.0=${DOTNET_SDK_VERSION}" \
+    && apt-get clean --yes \
+    && rm --force --recursive /var/lib/apt/lists/* \
+    && rm --force packages-microsoft-prod.deb
 
 # Ollama
 RUN curl --location --fail-with-body \
-        "https://github.com/ollama/ollama/releases/download/v${OLLAMA_VERSION}/ollama-linux-amd64" \
-        --output "ollama" \
+      "https://github.com/ollama/ollama/releases/download/v${OLLAMA_VERSION}/ollama-linux-amd64" \
+      --output "ollama" \
     && echo "${OLLAMA_SHA256} ollama" | sha256sum --check \
     && install --owner=root --group=root --mode=775 ollama /usr/local/bin/ollama \
     && rm --force ollama
+
+COPY --chown=nobody:nobody --chmod=0755 src/usr/local/bin/entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY --chown=nobody:nobody --chmod=0755 src/usr/local/bin/healthcheck.sh /usr/local/bin/healthcheck.sh
 
 USER ${CONTAINER_USER}
 
