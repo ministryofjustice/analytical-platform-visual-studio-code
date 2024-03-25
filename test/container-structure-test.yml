@@ -50,6 +50,11 @@ commandTests:
     args: ["-version"]
     exitCode: 0
 
+  - name: "dotnet"
+    command: "dotnet"
+    args: ["--version"]
+    expectedOutput: ["8.*"]
+
 fileContentTests:
   - name: "bashrc first-run-notice"
     path: "/etc/bash.bashrc"
