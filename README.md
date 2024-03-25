@@ -15,6 +15,7 @@ Additionally the following tools are installed:
 - [AWS CLI](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/index.html)
 - [Amazon Corretto](https://aws.amazon.com/corretto)
 - [Miniconda](https://docs.anaconda.com/free/miniconda/index.html)
+- [.NET SDK](https://learn.microsoft.com/en-us/dotnet/core/sdk)
 - [Ollama](https://ollama.com/)
 
 ## Running Locally
