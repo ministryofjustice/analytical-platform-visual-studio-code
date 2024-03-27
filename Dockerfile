@@ -16,10 +16,10 @@ ENV CONTAINER_USER="analyticalplatform" \
     CORRETTO_VERSION="1:21.0.2.14-1" \
     MINICONDA_VERSION="24.1.2-0" \
     MINICONDA_SHA256="8eb5999c2f7ac6189690d95ae5ec911032fa6697ae4b34eb3235802086566d78" \
-    DOTNET_SDK_VERSION="8.0.202-1" \
+    DOTNET_SDK_VERSION="8.0.203-1" \
     OLLAMA_VERSION="0.1.29" \
     OLLAMA_SHA256="332911072ca8bc2d41323582eed4d42205074b7ba82e7008d4e75761a1260b0e" \
-    PATH="/opt/conda/bin:${PATH}"
+    PATH="/opt/conda/bin:${HOME}/.local/bin:${PATH}"
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
@@ -39,7 +39,7 @@ RUN apt-get update --yes \
     && apt-get install --yes \
          "apt-transport-https=2.4.11" \
          "ca-certificates=20230311ubuntu0.22.04.1" \
-         "curl=7.81.0-1ubuntu1.15" \
+         "curl=7.81.0-1ubuntu1.16" \
          "git=1:2.34.1-1ubuntu1.10" \
          "gpg=2.2.27-3ubuntu2.1" \
          "jq=1.6-2.1ubuntu3" \
@@ -116,6 +116,7 @@ RUN curl --location --fail-with-body \
       --output "miniconda.sh" \
     && echo "${MINICONDA_SHA256} miniconda.sh" | sha256sum --check \
     && bash miniconda.sh -b -p /opt/conda \
+    && chown --recursive "${CONTAINER_USER}":"${CONTAINER_GROUP}" /opt/conda \
     && rm --force miniconda.sh
 
 # .NET SDK
