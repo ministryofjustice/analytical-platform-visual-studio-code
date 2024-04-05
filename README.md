@@ -89,14 +89,67 @@ under "(Optional) Verifying the integrity of your downloaded ZIP file".
 
 As of 20/02/24, the GPG public key used for verifying AWS CLI expires 26/07/24, but there is an [issue](https://github.com/aws/aws-cli/issues/6230) to track it.
 
+### Amazon Corretto
+
+The last version of Amazon Corretto can be obtained by running:
+
+```bash
+docker run -it --rm --platform linux/amd64 public.ecr.aws/ubuntu/ubuntu:22.04
+
+apt-get update
+
+apt-get install --yes curl gpg
+
+curl --location --fail-with-body \
+  "https://apt.corretto.aws/corretto.key" \
+  --output corretto.key
+
+cat corretto.key | gpg --dearmor --output corretto-keyring.gpg
+
+install -D --owner root --group root --mode 644 corretto-keyring.gpg /etc/apt/keyrings/corretto-keyring.gpg
+
+echo "deb [signed-by=/etc/apt/keyrings/corretto-keyring.gpg] https://apt.corretto.aws stable main" > /etc/apt/sources.list.d/corretto.list
+
+apt-get update --yes
+
+apt-cache policy java-21-amazon-corretto-jdk
+```
+
 ### Miniconda
 
 Releases for Miniconda are maintained on [docs.anaconda.com](https://docs.anaconda.com/free/miniconda/miniconda-release-notes/), from there we can use [repo.anaconda.com](https://repo.anaconda.com/miniconda/) to determine the artefact name and SHA256 based on a version. We currently use `py310`, `Linux` and `x86_64`variant.
 
+### .NET SDK
+
+The latest version of .NET SDK can be obtained by running:
+
+```bash
+docker run -it --rm --platform linux/amd64 public.ecr.aws/ubuntu/ubuntu:22.04
+
+apt-get update
+
+apt-get install --yes curl gpg
+
+curl --location --fail-with-body \
+  "https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb" \
+  --output "packages-microsoft-prod.deb"
+
+apt-get install --yes ./packages-microsoft-prod.deb
+
+apt-get update --yes
+
+apt-cache policy dotnet-sdk-8.0
+```
 
 ### Ollama
 
-Ollama is a tool that allows you to run open-source large language models (LLMs) locally on your machine. It supports a variety of models, including Llama 2, Code Llama, and others.
+Releases for Ollama are maintained on [GitHub](https://github.com/ollama/ollama/releases).
 
 Ollama don't currently provide SHA256 checksum for their installation file. For now, a checksum was acquired by running the following command locally:
-`curl --location --fail-with-body "https://github.com/ollama/ollama/releases/download/v0.1.29/ollama-linux-amd64" | sha256sum`
+
+```bash
+curl --location --fail-with-body "https://github.com/ollama/ollama/releases/download/$(curl --silent https://api.github.com/repos/ollama/ollama/releases/latest | jq -r .tag_name)/ollama-linux-amd64" | sha256sum
+```
+
+
+
