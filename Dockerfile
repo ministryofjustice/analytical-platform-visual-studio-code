@@ -11,14 +11,14 @@ ENV CONTAINER_USER="analyticalplatform" \
     CONTAINER_GROUP="analyticalplatform" \
     CONTAINER_GID="1000" \
     DEBIAN_FRONTEND="noninteractive" \
-    VISUAL_STUDIO_CODE_VERSION="1.87.2-1709912201" \
-    AWS_CLI_VERSION="2.15.32" \
+    VISUAL_STUDIO_CODE_VERSION="1.88.0-1712152114" \
+    AWS_CLI_VERSION="2.15.35" \
     CORRETTO_VERSION="1:21.0.2.14-1" \
     MINICONDA_VERSION="24.1.2-0" \
     MINICONDA_SHA256="8eb5999c2f7ac6189690d95ae5ec911032fa6697ae4b34eb3235802086566d78" \
     DOTNET_SDK_VERSION="8.0.203-1" \
-    OLLAMA_VERSION="0.1.29" \
-    OLLAMA_SHA256="332911072ca8bc2d41323582eed4d42205074b7ba82e7008d4e75761a1260b0e" \
+    OLLAMA_VERSION="0.1.30" \
+    OLLAMA_SHA256="cee140fdbbe1b21b520a83bf6246ca727df3cd69db560d6cf579888a4b966c93" \
     PATH="/opt/conda/bin:${HOME}/.local/bin:${PATH}"
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -37,7 +37,7 @@ RUN groupadd \
 # Base
 RUN apt-get update --yes \
     && apt-get install --yes \
-         "apt-transport-https=2.4.11" \
+         "apt-transport-https=2.4.12" \
          "ca-certificates=20230311ubuntu0.22.04.1" \
          "curl=7.81.0-1ubuntu1.16" \
          "git=1:2.34.1-1ubuntu1.10" \
