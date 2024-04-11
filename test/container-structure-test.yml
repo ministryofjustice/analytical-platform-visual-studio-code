@@ -76,4 +76,3 @@ fileExistenceTests:
   - name: "/opt/visual-studio-code/.profile"
     path: "/opt/visual-studio-code/.profile"
     shouldExist: true
-
