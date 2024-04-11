@@ -1,0 +1,7 @@
+# This is a first run notice for Visual Studio Code
+if [[ -t 1 ]] && [[ "${TERM_PROGRAM}" = "vscode" ]] && [[ ! -f "/home/analyticalplatform/.vscode/first-run-notice-already-displayed" ]]; then
+    cat /opt/visual-studio-code/first-run-notice.txt
+    # Mark first run notice as displayed after 10s to avoid problems with fast terminal refreshes hiding it
+    mkdir --parents "/home/analyticalplatform/.vscode"
+    ((sleep 10s; touch "/home/analyticalplatform/.vscode/first-run-notice-already-displayed") &)
+fi

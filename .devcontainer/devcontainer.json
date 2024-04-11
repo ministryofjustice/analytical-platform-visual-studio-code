@@ -2,7 +2,9 @@
   "name": "analytical-platform-visual-studio-code",
   "image": "ghcr.io/ministryofjustice/devcontainer-base:latest",
   "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/ministryofjustice/devcontainer-feature/container-structure-test:0": {},
+    "ghcr.io/ministryofjustice/devcontainer-feature/static-analysis:0": {}
   },
   "customizations": {
     "vscode": {
