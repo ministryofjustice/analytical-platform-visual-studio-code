@@ -1,12 +1,24 @@
 #!/usr/bin/env bash
 
 # Restore Bash configuration
-cp /opt/visual-studio-code/.bashrc /home/analyticalplatform/.bashrc
-cp /opt/visual-studio-code/.bash_logout /home/analyticalplatform/.bash_logout
-cp /opt/visual-studio-code/.profile /home/analyticalplatform/.profile
+if [[ ! -f "/home/analyticalplatform/.bashrc" ]]; then
+  cp /opt/visual-studio-code/.bashrc /home/analyticalplatform/.bashrc
+fi
 
-mkdir --parent /home/analyticalplatform/workspace
+if [[ ! -f "/home/analyticalplatform/.bash_logout" ]]; then
+  cp /opt/visual-studio-code/.bashrc /home/analyticalplatform/.bash_logout
+fi
 
+if [[ ! -f "/home/analyticalplatform/.profile" ]]; then
+  cp /opt/visual-studio-code/.bashrc /home/analyticalplatform/.profile
+fi
+
+# Create workspace directory
+if [[ ! -d "/home/analyticalplatform/workspace" ]]; then
+  mkdir --parent /home/analyticalplatform/workspace
+fi
+
+# Start Visual Studio Code Server
 /usr/bin/code serve-web \
   --without-connection-token \
   --accept-server-license-terms \
