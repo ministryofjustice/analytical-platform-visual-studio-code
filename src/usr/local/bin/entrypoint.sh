@@ -6,11 +6,11 @@ if [[ ! -f "/home/analyticalplatform/.bashrc" ]]; then
 fi
 
 if [[ ! -f "/home/analyticalplatform/.bash_logout" ]]; then
-  cp /opt/visual-studio-code/.bashrc /home/analyticalplatform/.bash_logout
+  cp /opt/visual-studio-code/.bash_logout /home/analyticalplatform/.bash_logout
 fi
 
 if [[ ! -f "/home/analyticalplatform/.profile" ]]; then
-  cp /opt/visual-studio-code/.bashrc /home/analyticalplatform/.profile
+  cp /opt/visual-studio-code/.profile /home/analyticalplatform/.profile
 fi
 
 # Create workspace directory
