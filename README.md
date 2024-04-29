@@ -49,6 +49,7 @@ Generally Dependabot does this, but the following command will return the digest
 
 ```bash
 docker pull --platform linux/amd64 public.ecr.aws/ubuntu/ubuntu:22.04
+
 docker image inspect --format='{{index .RepoDigests 0}}' public.ecr.aws/ubuntu/ubuntu:22.04
 ```
 

@@ -1,4 +1,4 @@
-FROM public.ecr.aws/ubuntu/ubuntu@sha256:12fb86d81bc4504d8261a91c83c54b9e5dcdf1d833ba0fe42ec9e0ee09a2b0ba
+FROM public.ecr.aws/ubuntu/ubuntu@sha256:1cc4019c277242e5fb710f2cf40af1590ad053b7d764efba48b051871dcc18d8
 
 LABEL org.opencontainers.image.vendor="Ministry of Justice" \
       org.opencontainers.image.authors="Analytical Platform (analytical-platform@digital.justice.gov.uk)" \
@@ -11,14 +11,14 @@ ENV CONTAINER_USER="analyticalplatform" \
     CONTAINER_GROUP="analyticalplatform" \
     CONTAINER_GID="1000" \
     DEBIAN_FRONTEND="noninteractive" \
-    VISUAL_STUDIO_CODE_VERSION="1.88.0-1712152114" \
-    AWS_CLI_VERSION="2.15.37" \
-    CORRETTO_VERSION="1:21.0.2.14-1" \
-    MINICONDA_VERSION="24.1.2-0" \
-    MINICONDA_SHA256="8eb5999c2f7ac6189690d95ae5ec911032fa6697ae4b34eb3235802086566d78" \
+    VISUAL_STUDIO_CODE_VERSION="1.88.1-1712771838" \
+    AWS_CLI_VERSION="2.15.42" \
+    CORRETTO_VERSION="1:21.0.3.9-1" \
+    MINICONDA_VERSION="24.3.0-0" \
+    MINICONDA_SHA256="def595b1b182749df0974cddb5c8befe70664ace16403d7a7bf54467be5ea48b" \
     DOTNET_SDK_VERSION="8.0.204-1" \
-    OLLAMA_VERSION="0.1.31" \
-    OLLAMA_SHA256="9d9a24ed741bf9d88c8e9df6865371681316aee298433d0291e86295045bfa96" \
+    OLLAMA_VERSION="0.1.32" \
+    OLLAMA_SHA256="539e8e1df2f74263fc56e0939cfc3f014a1addf02b07a06cae5cb42d810eb746" \
     PATH="/opt/conda/bin:${HOME}/.local/bin:${PATH}"
 
 SHELL ["/bin/bash", "-e", "-u", "-o", "pipefail", "-c"]
