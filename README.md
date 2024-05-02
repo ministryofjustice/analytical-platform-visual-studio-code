@@ -8,7 +8,7 @@ This repository is managed in Terraform [here](https://github.com/ministryofjust
 
 ## Features
 
-The base container image is [Ubuntu 22.04 LTS](https://gallery.ecr.aws/ubuntu/ubuntu).
+The base container image is [Ubuntu 24.04 LTS](https://gallery.ecr.aws/ubuntu/ubuntu).
 
 Additionally the following tools are installed:
 
@@ -48,9 +48,9 @@ Open a browser <http://localhost:8080/?folder=/home/analyticalplatform/workspace
 Generally Dependabot does this, but the following command will return the digest:
 
 ```bash
-docker pull --platform linux/amd64 public.ecr.aws/ubuntu/ubuntu:22.04
+docker pull --platform linux/amd64 public.ecr.aws/ubuntu/ubuntu:24.04
 
-docker image inspect --format='{{index .RepoDigests 0}}' public.ecr.aws/ubuntu/ubuntu:22.04
+docker image inspect --format='{{index .RepoDigests 0}}' public.ecr.aws/ubuntu/ubuntu:24.04
 ```
 
 ### APT Packages
@@ -58,7 +58,7 @@ docker image inspect --format='{{index .RepoDigests 0}}' public.ecr.aws/ubuntu/u
 To find latest APT package versions, you can run the following:
 
 ```bash
-docker run -it --rm --platform linux/amd64 public.ecr.aws/ubuntu/ubuntu:22.04
+docker run -it --rm --platform linux/amd64 public.ecr.aws/ubuntu/ubuntu:24.04
 
 apt-get update
 
@@ -95,7 +95,7 @@ As of 20/02/24, the GPG public key used for verifying AWS CLI expires 26/07/24, 
 The last version of Amazon Corretto can be obtained by running:
 
 ```bash
-docker run -it --rm --platform linux/amd64 public.ecr.aws/ubuntu/ubuntu:22.04
+docker run -it --rm --platform linux/amd64 public.ecr.aws/ubuntu/ubuntu:24.04
 
 apt-get update
 
@@ -118,21 +118,21 @@ apt-cache policy java-21-amazon-corretto-jdk
 
 ### Miniconda
 
-Releases for Miniconda are maintained on [docs.anaconda.com](https://docs.anaconda.com/free/miniconda/miniconda-release-notes/), from there we can use [repo.anaconda.com](https://repo.anaconda.com/miniconda/) to determine the artefact name and SHA256 based on a version. We currently use `py310`, `Linux` and `x86_64`variant.
+Releases for Miniconda are maintained on [docs.anaconda.com](https://docs.anaconda.com/free/miniconda/miniconda-release-notes/), from there we can use [repo.anaconda.com](https://repo.anaconda.com/miniconda/) to determine the artefact name and SHA256 based on a version. We currently use `py312`, `Linux` and `x86_64`variant.
 
 ### .NET SDK
 
 The latest version of .NET SDK can be obtained by running:
 
 ```bash
-docker run -it --rm --platform linux/amd64 public.ecr.aws/ubuntu/ubuntu:22.04
+docker run -it --rm --platform linux/amd64 public.ecr.aws/ubuntu/ubuntu:24.04
 
 apt-get update
 
 apt-get install --yes curl gpg
 
 curl --location --fail-with-body \
-  "https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb" \
+  "https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb" \
   --output "packages-microsoft-prod.deb"
 
 apt-get install --yes ./packages-microsoft-prod.deb
