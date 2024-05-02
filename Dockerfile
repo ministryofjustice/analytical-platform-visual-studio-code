@@ -1,4 +1,4 @@
-FROM public.ecr.aws/ubuntu/ubuntu@sha256:1cc4019c277242e5fb710f2cf40af1590ad053b7d764efba48b051871dcc18d8
+FROM public.ecr.aws/ubuntu/ubuntu@sha256:d55d834bd8b4e1b720fe743ab90a295e8f50ca280aa8c02700a5440461ea160e
 
 LABEL org.opencontainers.image.vendor="Ministry of Justice" \
       org.opencontainers.image.authors="Analytical Platform (analytical-platform@digital.justice.gov.uk)" \
@@ -12,11 +12,11 @@ ENV CONTAINER_USER="analyticalplatform" \
     CONTAINER_GID="1000" \
     DEBIAN_FRONTEND="noninteractive" \
     VISUAL_STUDIO_CODE_VERSION="1.88.1-1712771838" \
-    AWS_CLI_VERSION="2.15.42" \
+    AWS_CLI_VERSION="2.15.43" \
     CORRETTO_VERSION="1:21.0.3.9-1" \
     MINICONDA_VERSION="24.3.0-0" \
-    MINICONDA_SHA256="def595b1b182749df0974cddb5c8befe70664ace16403d7a7bf54467be5ea48b" \
-    DOTNET_SDK_VERSION="8.0.204-1" \
+    MINICONDA_SHA256="96a44849ff17e960eeb8877ecd9055246381c4d4f2d031263b63fa7e2e930af1" \
+    DOTNET_SDK_VERSION="8.0.104-0ubuntu1" \
     OLLAMA_VERSION="0.1.32" \
     OLLAMA_SHA256="539e8e1df2f74263fc56e0939cfc3f014a1addf02b07a06cae5cb42d810eb746" \
     PATH="/opt/conda/bin:${HOME}/.local/bin:${PATH}"
@@ -25,6 +25,9 @@ SHELL ["/bin/bash", "-e", "-u", "-o", "pipefail", "-c"]
 
 # User Configuration
 RUN <<EOF
+# Ubuntu have added a user with UID 1000 already, but this is the UID we use in the tooling cluster
+userdel --remove --force ubuntu
+
 groupadd \
   --gid ${CONTAINER_GID} \
   ${CONTAINER_GROUP}
@@ -42,16 +45,16 @@ RUN <<EOF
 apt-get update --yes
 
 apt-get install --yes \
-  "apt-transport-https=2.4.12" \
-  "ca-certificates=20230311ubuntu0.22.04.1" \
-  "curl=7.81.0-1ubuntu1.16" \
-  "git=1:2.34.1-1ubuntu1.10" \
-  "gpg=2.2.27-3ubuntu2.1" \
-  "jq=1.6-2.1ubuntu3" \
+  "apt-transport-https=2.7.14build2" \
+  "ca-certificates=20240203" \
+  "curl=8.5.0-2ubuntu10.1" \
+  "git=1:2.43.0-1ubuntu7" \
+  "gpg=2.4.4-2ubuntu17" \
+  "jq=1.7.1-3build1" \
   "mandoc=1.14.6-1" \
-  "python3.10=3.10.12-1~22.04.3" \
-  "python3-pip=22.0.2+dfsg-1ubuntu0.4" \
-  "unzip=6.0-26ubuntu3.2"
+  "python3.12=3.12.3-1" \
+  "python3-pip=24.0+dfsg-1ubuntu1" \
+  "unzip=6.0-28ubuntu4"
 
 apt-get clean --yes
 
@@ -142,7 +145,7 @@ EOF
 # Miniconda
 RUN <<EOF
 curl --location --fail-with-body \
-  "https://repo.anaconda.com/miniconda/Miniconda3-py310_${MINICONDA_VERSION}-Linux-x86_64.sh" \
+  "https://repo.anaconda.com/miniconda/Miniconda3-py312_${MINICONDA_VERSION}-Linux-x86_64.sh" \
   --output "miniconda.sh"
 
 echo "${MINICONDA_SHA256} miniconda.sh" | sha256sum --check
@@ -157,7 +160,7 @@ EOF
 # .NET SDK
 RUN <<EOF
 curl --location --fail-with-body \
-  "https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb" \
+  "https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb" \
   --output "packages-microsoft-prod.deb"
 
 apt-get install --yes ./packages-microsoft-prod.deb
