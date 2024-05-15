@@ -159,12 +159,6 @@ EOF
 
 # .NET SDK
 RUN <<EOF
-curl --location --fail-with-body \
-  "https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb" \
-  --output "packages-microsoft-prod.deb"
-
-apt-get install --yes ./packages-microsoft-prod.deb
-
 apt-get update --yes
 
 apt-get install --yes "dotnet-sdk-8.0=${DOTNET_SDK_VERSION}"
@@ -172,8 +166,6 @@ apt-get install --yes "dotnet-sdk-8.0=${DOTNET_SDK_VERSION}"
 apt-get clean --yes
 
 rm --force --recursive /var/lib/apt/lists/*
-
-rm --force packages-microsoft-prod.deb
 EOF
 
 # Ollama
