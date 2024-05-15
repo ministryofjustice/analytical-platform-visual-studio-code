@@ -127,16 +127,6 @@ The latest version of .NET SDK can be obtained by running:
 ```bash
 docker run -it --rm --platform linux/amd64 public.ecr.aws/ubuntu/ubuntu:24.04
 
-apt-get update
-
-apt-get install --yes curl gpg
-
-curl --location --fail-with-body \
-  "https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb" \
-  --output "packages-microsoft-prod.deb"
-
-apt-get install --yes ./packages-microsoft-prod.deb
-
 apt-get update --yes
 
 apt-cache policy dotnet-sdk-8.0

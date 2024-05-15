@@ -16,7 +16,7 @@ ENV CONTAINER_USER="analyticalplatform" \
     CORRETTO_VERSION="1:21.0.3.9-1" \
     MINICONDA_VERSION="24.3.0-0" \
     MINICONDA_SHA256="96a44849ff17e960eeb8877ecd9055246381c4d4f2d031263b63fa7e2e930af1" \
-    DOTNET_SDK_VERSION="8.0.300-1" \
+    DOTNET_SDK_VERSION="8.0.104-0ubuntu1" \
     OLLAMA_VERSION="0.1.32" \
     OLLAMA_SHA256="539e8e1df2f74263fc56e0939cfc3f014a1addf02b07a06cae5cb42d810eb746" \
     PATH="/opt/conda/bin:${HOME}/.local/bin:${PATH}"
@@ -159,12 +159,6 @@ EOF
 
 # .NET SDK
 RUN <<EOF
-curl --location --fail-with-body \
-  "https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb" \
-  --output "packages-microsoft-prod.deb"
-
-apt-get install --yes ./packages-microsoft-prod.deb
-
 apt-get update --yes
 
 apt-get install --yes "dotnet-sdk-8.0=${DOTNET_SDK_VERSION}"
@@ -172,8 +166,6 @@ apt-get install --yes "dotnet-sdk-8.0=${DOTNET_SDK_VERSION}"
 apt-get clean --yes
 
 rm --force --recursive /var/lib/apt/lists/*
-
-rm --force packages-microsoft-prod.deb
 EOF
 
 # Ollama
