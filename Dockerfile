@@ -181,6 +181,12 @@ install --owner=root --group=root --mode=775 ollama /usr/local/bin/ollama
 rm --force ollama
 EOF
 
+# Cuda Drivers
+RUN <<EOF
+apt update --yes
+apt install --yes nvidia-driver-535 gcc nvidia-cuda-toolkit
+EOF
+
 USER ${CONTAINER_USER}
 WORKDIR /home/${CONTAINER_USER}
 EXPOSE 8080
