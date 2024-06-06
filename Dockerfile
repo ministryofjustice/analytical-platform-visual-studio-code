@@ -11,14 +11,14 @@ ENV CONTAINER_USER="analyticalplatform" \
     CONTAINER_GROUP="analyticalplatform" \
     CONTAINER_GID="1000" \
     DEBIAN_FRONTEND="noninteractive" \
-    VISUAL_STUDIO_CODE_VERSION="1.89.0-1714530869" \
-    AWS_CLI_VERSION="2.15.43" \
+    VISUAL_STUDIO_CODE_VERSION="1.90.0-1717531825" \
+    AWS_CLI_VERSION="2.16.2" \
     CORRETTO_VERSION="1:21.0.3.9-1" \
-    MINICONDA_VERSION="24.3.0-0" \
-    MINICONDA_SHA256="96a44849ff17e960eeb8877ecd9055246381c4d4f2d031263b63fa7e2e930af1" \
-    DOTNET_SDK_VERSION="8.0.104-0ubuntu1" \
-    OLLAMA_VERSION="0.1.32" \
-    OLLAMA_SHA256="539e8e1df2f74263fc56e0939cfc3f014a1addf02b07a06cae5cb42d810eb746" \
+    MINICONDA_VERSION="24.4.0-0" \
+    MINICONDA_SHA256="b6597785e6b071f1ca69cf7be6d0161015b96340b9a9e132215d5713408c3a7c" \
+    DOTNET_SDK_VERSION="8.0.105-0ubuntu1~24.04.1" \
+    OLLAMA_VERSION="0.1.41" \
+    OLLAMA_SHA256="680c8c5372c5d4e117430ff76623a15e3a71ca95ab02d416d448be4b5f6d12b3" \
     PATH="/opt/conda/bin:${HOME}/.local/bin:${PATH}"
 
 SHELL ["/bin/bash", "-e", "-u", "-o", "pipefail", "-c"]
@@ -48,7 +48,7 @@ apt-get install --yes \
   "apt-transport-https=2.7.14build2" \
   "ca-certificates=20240203" \
   "curl=8.5.0-2ubuntu10.1" \
-  "git=1:2.43.0-1ubuntu7" \
+  "git=1:2.43.0-1ubuntu7.1" \
   "gpg=2.4.4-2ubuntu17" \
   "jq=1.7.1-3build1" \
   "mandoc=1.14.6-1" \
