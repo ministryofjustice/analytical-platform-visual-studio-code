@@ -17,6 +17,7 @@ Additionally the following tools are installed:
 - [Miniconda](https://docs.anaconda.com/free/miniconda/index.html)
 - [.NET SDK](https://learn.microsoft.com/en-us/dotnet/core/sdk)
 - [Ollama](https://ollama.com/)
+- [Python 3.9.19](https://www.python.org/downloads/release/python-3919/) (To provide compatability with Analytical Platform JupyterLab)
 
 ## Running Locally
 
@@ -142,5 +143,22 @@ Ollama don't currently provide SHA256 checksum for their installation file. For 
 curl --location --fail-with-body "https://github.com/ollama/ollama/releases/download/$(curl --silent https://api.github.com/repos/ollama/ollama/releases/latest | jq -r .tag_name)/ollama-linux-amd64" | sha256sum
 ```
 
+### Python 3.9
 
+The latest version of Python 3.9 can be obtained by running:
 
+```bash
+docker run -it --rm --platform linux/amd64 public.ecr.aws/ubuntu/ubuntu:24.04
+
+export DEBIAN_FRONTEND="noninteractive"
+
+apt-get update --yes
+
+apt-get install --yes software-properties-common
+
+add-apt-repository --yes ppa:deadsnakes/ppa
+
+apt-get update --yes
+
+apt-cache policy python3.9
+```

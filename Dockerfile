@@ -54,6 +54,7 @@ apt-get install --yes \
   "mandoc=1.14.6-1" \
   "python3.12=3.12.3-1" \
   "python3-pip=24.0+dfsg-1ubuntu1" \
+  "software-properties-common=0.99.48" \
   "unzip=6.0-28ubuntu4"
 
 apt-get clean --yes
@@ -179,6 +180,19 @@ echo "${OLLAMA_SHA256} ollama" | sha256sum --check
 install --owner=root --group=root --mode=775 ollama /usr/local/bin/ollama
 
 rm --force ollama
+EOF
+
+# Python 3.9 (Provides compatability with JupyterLab)
+RUN <<EOF
+add-apt-repository --yes ppa:deadsnakes/ppa
+
+apt-get update --yes
+
+apt-get install --yes "python3.9=3.9.19-1+noble2"
+
+apt-get clean --yes
+
+rm --force --recursive /var/lib/apt/lists/*
 EOF
 
 USER ${CONTAINER_USER}

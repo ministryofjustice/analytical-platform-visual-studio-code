@@ -34,6 +34,16 @@ commandTests:
     args: ["info"]
     expectedOutput: [".*active environment.*"]
 
+  - name: "python3.12"
+    command: "python3"
+    args: ["--version"]
+    expectedOutput: ["Python 3.12.*"]
+
+  - name: "python3.9"
+    command: "python3.9"
+    args: ["--version"]
+    expectedOutput: ["Python 3.9.*"]
+
   - name: "pip"
     command: "pip"
     args: ["--version"]
