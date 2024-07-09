@@ -58,7 +58,7 @@ commandTests:
 fileContentTests:
   - name: "bashrc first-run-notice"
     path: "/etc/bash.bashrc"
-    expectedContents: ["# This is a first run notice for Visual Studio Code"]
+    expectedContents: ["# This is a first run notice for Visual Studio Code"]
 
 fileExistenceTests:
   - name: "/opt/visual-studio-code"
