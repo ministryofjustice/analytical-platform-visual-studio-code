@@ -19,7 +19,13 @@ ENV CONTAINER_USER="analyticalplatform" \
     DOTNET_SDK_VERSION="8.0.107-0ubuntu1~24.04.1" \
     OLLAMA_VERSION="0.2.1" \
     OLLAMA_SHA256="8a29a80403f67abe0f5b3737767b2a21732409e8e4429098af75474484e43c18" \
-    PATH="/opt/conda/bin:${HOME}/.local/bin:${PATH}"
+    NVIDIA_CUDA_VERSION="12.5.82-1" \
+    NVIDIA_CUDA_COMPAT_VERSION="555.42.06-1" \
+    NVIDIA_REQUIRE_CUDA="cuda>=12.5 brand=tesla,driver>=470,driver<471 brand=tesla,driver>=535,driver<536 brand=tesla,driver>=550,driver<551" \
+    NVIDIA_VISIBLE_DEVICES="all" \
+    NVIDIA_DRIVER_CAPABILITIES="compute,utility" \
+    LD_LIBRARY_PATH="/usr/local/nvidia/lib:/usr/local/nvidia/lib64" \
+    PATH="/opt/conda/bin:${HOME}/.local/bin:/usr/local/nvidia/bin:/usr/local/cuda/bin:${PATH}"
 
 SHELL ["/bin/bash", "-e", "-u", "-o", "pipefail", "-c"]
 
@@ -49,6 +55,7 @@ apt-get install --yes \
   "ca-certificates=20240203" \
   "curl=8.5.0-2ubuntu10.1" \
   "git=1:2.43.0-1ubuntu7.1" \
+  "gnupg2=2.4.4-2ubuntu17" \
   "gpg=2.4.4-2ubuntu17" \
   "jq=1.7.1-3build1" \
   "mandoc=1.14.6-1" \
@@ -179,6 +186,21 @@ echo "${OLLAMA_SHA256} ollama" | sha256sum --check
 install --owner=root --group=root --mode=775 ollama /usr/local/bin/ollama
 
 rm --force ollama
+EOF
+
+# NVIDIA CUDA
+RUN <<EOF
+curl --location --fail-with-body \
+  "https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/cuda-keyring_1.1-1_all.deb" \
+  --output "cuda-keyring_1.1-1_all.deb"
+
+apt-get install --yes ./cuda-keyring_1.1-1_all.deb
+
+apt-get update --yes
+
+apt-get install --yes \
+  "cuda-cudart-12-5=${NVIDIA_CUDA_VERSION}" \
+  "cuda-compat-12-5=${NVIDIA_CUDA_COMPAT_VERSION}"
 EOF
 
 USER ${CONTAINER_USER}
