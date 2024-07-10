@@ -76,3 +76,7 @@ fileExistenceTests:
   - name: "/opt/visual-studio-code/.profile"
     path: "/opt/visual-studio-code/.profile"
     shouldExist: true
+
+  - name: "/usr/local/cuda/lib64/libcudart.so.12"
+    path: "/usr/local/cuda/lib64/libcudart.so.12"
+    shouldExist: true
