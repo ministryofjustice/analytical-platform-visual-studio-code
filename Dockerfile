@@ -24,7 +24,7 @@ ENV CONTAINER_USER="analyticalplatform" \
     # NVIDIA_REQUIRE_CUDA="cuda>=12.5 brand=tesla,driver>=470,driver<471 brand=tesla,driver>=535,driver<536 brand=tesla,driver>=550,driver<551" \
     # NVIDIA_VISIBLE_DEVICES="all" \
     # NVIDIA_DRIVER_CAPABILITIES="compute,utility" \
-    LD_LIBRARY_PATH="/usr/local/nvidia/lib:/usr/local/nvidia/lib64" \
+    LD_LIBRARY_PATH="/usr/local/cuda/lib64" \
     PATH="/opt/conda/bin:${HOME}/.local/bin:${PATH}"
 
 SHELL ["/bin/bash", "-e", "-u", "-o", "pipefail", "-c"]
@@ -202,8 +202,7 @@ apt-get install --yes \
   "cuda-cudart-12-5=${NVIDIA_CUDA_VERSION}" \
   "cuda-compat-12-5=${NVIDIA_CUDA_COMPAT_VERSION}"
 
-echo "/usr/local/nvidia/lib" >> /etc/ld.so.conf.d/nvidia.conf
-echo "/usr/local/nvidia/lib64" >> /etc/ld.so.conf.d/nvidia.conf
+echo "/usr/local/cuda/lib64" >> /etc/ld.so.conf.d/cuda.conf
 EOF
 
 USER ${CONTAINER_USER}
