@@ -201,6 +201,9 @@ apt-get update --yes
 apt-get install --yes \
   "cuda-cudart-12-5=${NVIDIA_CUDA_VERSION}" \
   "cuda-compat-12-5=${NVIDIA_CUDA_COMPAT_VERSION}"
+
+echo "/usr/local/nvidia/lib" >> /etc/ld.so.conf.d/nvidia.conf
+echo "/usr/local/nvidia/lib64" >> /etc/ld.so.conf.d/nvidia.conf
 EOF
 
 USER ${CONTAINER_USER}
