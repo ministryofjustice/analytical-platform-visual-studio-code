@@ -19,12 +19,13 @@ ENV CONTAINER_USER="analyticalplatform" \
     DOTNET_SDK_VERSION="8.0.107-0ubuntu1~24.04.1" \
     OLLAMA_VERSION="0.2.1" \
     OLLAMA_SHA256="8a29a80403f67abe0f5b3737767b2a21732409e8e4429098af75474484e43c18" \
-    NVIDIA_CUDA_VERSION="12.5.82-1" \
+    CUDA_VERSION="12.5.0" \
+    NVIDIA_CUDA_CUDART_VERSION="12.5.82-1" \
     NVIDIA_CUDA_COMPAT_VERSION="555.42.06-1" \
     NVIDIA_VISIBLE_DEVICES="all" \
     NVIDIA_DRIVER_CAPABILITIES="compute,utility" \
-    LD_LIBRARY_PATH="/usr/local/cuda/lib64" \
-    PATH="/opt/conda/bin:${HOME}/.local/bin:${PATH}"
+    LD_LIBRARY_PATH="/usr/local/nvidia/lib:/usr/local/nvidia/lib64" \
+    PATH="/usr/local/nvidia/bin:/usr/local/cuda/bin:/opt/conda/bin:${HOME}/.local/bin:${PATH}"
 
 SHELL ["/bin/bash", "-e", "-u", "-o", "pipefail", "-c"]
 
@@ -198,10 +199,11 @@ apt-get install --yes ./cuda-keyring_1.1-1_all.deb
 apt-get update --yes
 
 apt-get install --yes \
-  "cuda-cudart-12-5=${NVIDIA_CUDA_VERSION}" \
+  "cuda-cudart-12-5=${NVIDIA_CUDA_CUDART_VERSION}" \
   "cuda-compat-12-5=${NVIDIA_CUDA_COMPAT_VERSION}"
 
-echo "/usr/local/cuda/lib64" >> /etc/ld.so.conf.d/cuda.conf
+echo "/usr/local/nvidia/lib" >> /etc/ld.so.conf.d/nvidia.conf
+echo "/usr/local/nvidia/lib64" >> /etc/ld.so.conf.d/nvidia.conf
 EOF
 
 USER ${CONTAINER_USER}
