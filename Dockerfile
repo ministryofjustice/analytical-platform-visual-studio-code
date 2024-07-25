@@ -19,7 +19,14 @@ ENV CONTAINER_USER="analyticalplatform" \
     DOTNET_SDK_VERSION="8.0.107-0ubuntu1~24.04.1" \
     OLLAMA_VERSION="0.2.1" \
     OLLAMA_SHA256="8a29a80403f67abe0f5b3737767b2a21732409e8e4429098af75474484e43c18" \
-    PATH="/opt/conda/bin:${HOME}/.local/bin:${PATH}"
+    CUDA_VERSION="12.5.1" \
+    NVIDIA_DISABLE_REQUIRE="true" \
+    NVIDIA_CUDA_CUDART_VERSION="12.5.82-1" \
+    NVIDIA_CUDA_COMPAT_VERSION="555.42.06-1" \
+    NVIDIA_VISIBLE_DEVICES="all" \
+    NVIDIA_DRIVER_CAPABILITIES="compute,utility" \
+    LD_LIBRARY_PATH="/usr/local/nvidia/lib:/usr/local/nvidia/lib64" \
+    PATH="/usr/local/nvidia/bin:/usr/local/cuda/bin:/opt/conda/bin:${HOME}/.local/bin:${PATH}"
 
 SHELL ["/bin/bash", "-e", "-u", "-o", "pipefail", "-c"]
 
@@ -49,6 +56,7 @@ apt-get install --yes \
   "ca-certificates=20240203" \
   "curl=8.5.0-2ubuntu10.1" \
   "git=1:2.43.0-1ubuntu7.1" \
+  "gnupg2=2.4.4-2ubuntu17" \
   "gpg=2.4.4-2ubuntu17" \
   "jq=1.7.1-3build1" \
   "mandoc=1.14.6-1" \
@@ -97,7 +105,7 @@ apt-get install --yes "code=${VISUAL_STUDIO_CODE_VERSION}"
 
 apt-get clean --yes
 
-rm --force --recursive packages.microsoft.gpg /var/lib/apt/lists/*
+rm --force --recursive microsoft.asc packages.microsoft.gpg /var/lib/apt/lists/*
 EOF
 
 # AWS CLI
@@ -179,6 +187,32 @@ echo "${OLLAMA_SHA256} ollama" | sha256sum --check
 install --owner=root --group=root --mode=775 ollama /usr/local/bin/ollama
 
 rm --force ollama
+EOF
+
+# NVIDIA CUDA
+RUN <<EOF
+curl --location --fail-with-body \
+  "https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/3bf863cc.pub" \
+  --output "3bf863cc.pub"
+
+cat 3bf863cc.pub | gpg --dearmor --output nvidia.gpg
+
+install -D --owner root --group root --mode 644 nvidia.gpg /etc/apt/keyrings/nvidia.gpg
+
+echo "deb [signed-by=/etc/apt/keyrings/nvidia.gpg] https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64 /" > /etc/apt/sources.list.d/cuda.list
+
+apt-get update --yes
+
+apt-get install --yes \
+  "cuda-cudart-12-5=${NVIDIA_CUDA_CUDART_VERSION}" \
+  "cuda-compat-12-5=${NVIDIA_CUDA_COMPAT_VERSION}"
+
+echo "/usr/local/nvidia/lib" >> /etc/ld.so.conf.d/nvidia.conf
+echo "/usr/local/nvidia/lib64" >> /etc/ld.so.conf.d/nvidia.conf
+
+apt-get clean --yes
+
+rm --force --recursive 3bf863cc.pub /var/lib/apt/lists/*
 EOF
 
 USER ${CONTAINER_USER}
