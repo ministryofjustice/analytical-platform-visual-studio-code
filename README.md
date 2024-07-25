@@ -142,5 +142,30 @@ Ollama don't currently provide SHA256 checksum for their installation file. For 
 curl --location --fail-with-body "https://github.com/ollama/ollama/releases/download/$(curl --silent https://api.github.com/repos/ollama/ollama/releases/latest | jq -r .tag_name)/ollama-linux-amd64" | sha256sum
 ```
 
+### NVIDIA CUDA
 
+The latest version of NVIDIA can be obtained by running:
 
+```bash
+docker run -it --rm --platform linux/amd64 public.ecr.aws/ubuntu/ubuntu:24.04
+
+apt-get update
+
+apt-get install --yes curl gpg
+
+curl --location --fail-with-body \
+  "https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/3bf863cc.pub" \
+  --output "3bf863cc.pub"
+
+cat 3bf863cc.pub | gpg --dearmor --output nvidia.gpg
+
+install -D --owner root --group root --mode 644 nvidia.gpg /etc/apt/keyrings/nvidia.gpg
+
+echo "deb [signed-by=/etc/apt/keyrings/nvidia.gpg] https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64 /" > /etc/apt/sources.list.d/cuda.list
+
+apt-get update --yes
+
+apt-cache policy cuda-cudart-12-5
+
+apt-cache policy cuda-compat-12-5
+```
