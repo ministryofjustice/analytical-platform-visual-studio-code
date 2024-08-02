@@ -1,4 +1,4 @@
-FROM public.ecr.aws/ubuntu/ubuntu@sha256:4f5ca1c8b7abe2bd1162e629cafbd824c303b98954b1a168526aca6021f8affe
+FROM public.ecr.aws/ubuntu/ubuntu@sha256:288b44a1b2dfe3788255c3abd41e346bece153b9e066325f461f605425afaf82
 
 LABEL org.opencontainers.image.vendor="Ministry of Justice" \
       org.opencontainers.image.authors="Analytical Platform (analytical-platform@digital.justice.gov.uk)" \
@@ -12,14 +12,14 @@ ENV CONTAINER_USER="analyticalplatform" \
     CONTAINER_GID="1000" \
     DEBIAN_FRONTEND="noninteractive" \
     PIP_BREAK_SYSTEM_PACKAGES="1" \
-    VISUAL_STUDIO_CODE_VERSION="1.91.1-1720564633" \
-    AWS_CLI_VERSION="2.17.18" \
+    VISUAL_STUDIO_CODE_VERSION="1.92.0-1722473020" \
+    AWS_CLI_VERSION="2.17.21" \
     CORRETTO_VERSION="1:21.0.4.7-1" \
     MINICONDA_VERSION="24.5.0-0" \
     MINICONDA_SHA256="4b3b3b1b99215e85fd73fb2c2d7ebf318ac942a457072de62d885056556eb83e" \
     DOTNET_SDK_VERSION="8.0.107-0ubuntu1~24.04.1" \
-    OLLAMA_VERSION="0.3.0" \
-    OLLAMA_SHA256="b8817c34882c7ac138565836ac1995a2c61261a79315a13a0aebbfe5435da855" \
+    OLLAMA_VERSION="0.3.2" \
+    OLLAMA_SHA256="5b1b18ffd9bed62f85cf83fd7324ef14600f268d5b92d2c5477c907265c0b172" \
     CUDA_VERSION="12.5.1" \
     NVIDIA_DISABLE_REQUIRE="true" \
     NVIDIA_CUDA_CUDART_VERSION="12.5.82-1" \
@@ -61,7 +61,7 @@ apt-get install --yes \
   "gpg=2.4.4-2ubuntu17" \
   "jq=1.7.1-3build1" \
   "mandoc=1.14.6-1" \
-  "python3.12=3.12.3-1" \
+  "python3.12=3.12.3-1ubuntu0.1" \
   "python3-pip=24.0+dfsg-1ubuntu1" \
   "unzip=6.0-28ubuntu4"
 
