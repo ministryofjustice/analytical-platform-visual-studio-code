@@ -5,78 +5,12 @@ containerRunOptions:
   user: "analyticalplatform"
 
 commandTests:
-  - name: "ubuntu"
-    command: "grep"
-    args: ["DISTRIB_RELEASE", "/etc/lsb-release"]
-    expectedOutput: ["DISTRIB_RELEASE=24.04"]
-
-  - name: "whoami"
-    command: "whoami"
-    expectedOutput: ["analyticalplatform"]
-
-  - name: "user"
-    command: "id"
-    args: ["--user", "analyticalplatform"]
-    expectedOutput: ["1000"]
-
-  - name: "groups"
-    command: "id"
-    args: ["--groups", "analyticalplatform"]
-    expectedOutput: ["100"]
-
-  - name: "aws"
-    command: "aws"
+  - name: "code"
+    command: "code"
     args: ["--version"]
-    expectedOutput: ["aws-cli/2.*"]
-
-  - name: "conda"
-    command: "conda"
-    args: ["info"]
-    expectedOutput: [".*active environment.*"]
-
-  - name: "pip"
-    command: "pip"
-    args: ["--version"]
-    expectedOutput: ["pip.*"]
-
-  - name: "ollama"
-    command: "ollama"
-    args: ["--version"]
-    expectedOutput: [".*version.*"]
-
-  # "java -version" doesn't print to stdout, only stderr
-  - name: "corretto"
-    command: "java"
-    args: ["-version"]
-    exitCode: 0
-
-  - name: "dotnet"
-    command: "dotnet"
-    args: ["--version"]
-    expectedOutput: ["8.*"]
-
-fileContentTests:
-  - name: "bashrc first-run-notice"
-    path: "/etc/bash.bashrc"
-    expectedContents: ["# This is a first run notice for Visual Studio Code"]
+    expectedOutput: ["1.92.1"]
 
 fileExistenceTests:
-  - name: "/opt/visual-studio-code"
-    path: "/opt/visual-studio-code"
-    shouldExist: true
-
-  - name: "/opt/visual-studio-code/.bashrc"
-    path: "/opt/visual-studio-code/.bashrc"
-    shouldExist: true
-
-  - name: "/opt/visual-studio-code/.bash_logout"
-    path: "/opt/visual-studio-code/.bash_logout"
-    shouldExist: true
-
-  - name: "/opt/visual-studio-code/.profile"
-    path: "/opt/visual-studio-code/.profile"
-    shouldExist: true
-
-  - name: "/usr/local/cuda/lib64/libcudart.so.12"
-    path: "/usr/local/cuda/lib64/libcudart.so.12"
+  - name: "/opt/analytical-platform/first-run-notice.txt"
+    path: "/opt/analytical-platform/first-run-notice.txt"
     shouldExist: true

@@ -1,3 +1,0 @@
-GHSA-vh55-786g-wjwj # This is not something we can patch (https://github.com/ministryofjustice/analytical-platform-visual-studio-code/security/code-scanning/1)
-CVE-2024-0057       # This is not something we can patch
-CVE-2024-24790      # This is not something we can patch
