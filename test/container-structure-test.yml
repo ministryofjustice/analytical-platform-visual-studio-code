@@ -8,9 +8,17 @@ commandTests:
   - name: "code"
     command: "code"
     args: ["--version"]
-    expectedOutput: ["1.93.1"]
+    expectedOutput: ["1.94.0"]
 
 fileExistenceTests:
   - name: "/opt/analytical-platform/first-run-notice.txt"
     path: "/opt/analytical-platform/first-run-notice.txt"
+    shouldExist: true
+
+  - name: "/usr/local/bin/entrypoint.sh"
+    path: "/usr/local/bin/entrypoint.sh"
+    shouldExist: true
+
+  - name: "/usr/local/bin/healthcheck.sh"
+    path: "/usr/local/bin/healthcheck.sh"
     shouldExist: true
