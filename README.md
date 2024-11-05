@@ -55,3 +55,7 @@ This will return a string like:
 ```
 
 From that, we want `1.86.2-1707854558`.
+
+## Maintenance
+
+Maintenance of this component is scheduled in this [workflow](https://github.com/ministryofjustice/analytical-platform/blob/main/.github/workflows/schedule-issue-vscode.yml), which generates a maintenance ticket as per this [example](https://github.com/ministryofjustice/analytical-platform/issues/5904).
