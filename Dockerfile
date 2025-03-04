@@ -6,7 +6,7 @@ LABEL org.opencontainers.image.vendor="Ministry of Justice" \
       org.opencontainers.image.description="Visual Studio Code image for Analytical Platform" \
       org.opencontainers.image.url="https://github.com/ministryofjustice/analytical-platform-visual-studio-code"
 
-ENV VISUAL_STUDIO_CODE_VERSION="1.97.1-1739197498"
+ENV VISUAL_STUDIO_CODE_VERSION="1.97.2-1739406807"
 
 SHELL ["/bin/bash", "-e", "-u", "-o", "pipefail", "-c"]
 
