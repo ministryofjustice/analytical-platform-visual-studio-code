@@ -34,6 +34,20 @@ jobs:
         run: |
           make build
 
+      - name: Generate .trivyignore
+        id: generate_trivyignore
+        shell: bash
+        run: |
+          imageVersion=$(grep "^FROM" Dockerfile | cut -d':' -f2 | cut -d'@' -f1)
+
+          curl --silent --show-error --location "https://raw.githubusercontent.com/ministryofjustice/analytical-platform-cloud-development-environment-base/refs/tags/${imageVersion}/.trivyignore" --output "analytical-platform-cloud-development-environment-base-trivyignore"
+
+          if [[ ! -f .trivyignore ]]; then
+            mv "analytical-platform-cloud-development-environment-base-trivyignore" .trivyignore
+          else
+            cat "analytical-platform-cloud-development-environment-base-trivyignore" >> .trivyignore
+          fi
+
       - name: Scan
         id: scan
         uses: aquasecurity/trivy-action@18f2510ee396bbf400402947b394f2dd8c87dbb0 # v0.29.0
