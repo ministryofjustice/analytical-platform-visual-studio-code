@@ -1,1 +1,3 @@
-# As of 04/03/2025 there are no CRITICAL or HIGH CVEs for this image
+# Ubuntu
+CVE-2024-53140
+CVE-2024-56595
