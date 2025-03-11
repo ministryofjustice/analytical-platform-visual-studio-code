@@ -8,7 +8,7 @@ commandTests:
   - name: "code"
     command: "code"
     args: ["--version"]
-    expectedOutput: ["1.97.2"]
+    expectedOutput: ["1.98.1"]
 
 fileExistenceTests:
   - name: "/opt/analytical-platform/first-run-notice.txt"
