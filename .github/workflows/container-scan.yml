@@ -13,4 +13,4 @@ jobs:
     name: Container Scan
     permissions:
       contents: read
-    uses: ministryofjustice/analytical-platform-github-actions/.github/workflows/reusable-container-scan.yml@9a5851fb329ecc1542f0e8410749c4365ed24ff0 # v1.0.0
+    uses: ministryofjustice/analytical-platform-github-actions/.github/workflows/reusable-container-scan.yml@e1baba3ae73fc1d679445921dfd1614dd35eacdd # DEBUG
