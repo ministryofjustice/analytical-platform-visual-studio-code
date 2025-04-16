@@ -1,3 +1,7 @@
 # Ubuntu
 CVE-2024-53140
 CVE-2024-56595
+
+# Go
+## CVE-2025-22869 (usr/bin/ollama, usr/local/bin/aws-sso, usr/local/bin/cloud-platform)
+CVE-2025-22869
