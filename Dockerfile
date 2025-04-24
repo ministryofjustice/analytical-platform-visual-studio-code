@@ -1,4 +1,4 @@
-FROM ghcr.io/ministryofjustice/analytical-platform-cloud-development-environment-base:1.18.1@sha256:46c8fccf5871c743db9b12c249b11c3f834ed6e445ec75d6776946f1ad01e81b
+FROM ghcr.io/ministryofjustice/analytical-platform-cloud-development-environment-base:1.19.0@sha256:9690fb67907a183acc87aedca2ec8a2f315e11f00510027cebd6f893af1a2d01
 
 LABEL org.opencontainers.image.vendor="Ministry of Justice" \
       org.opencontainers.image.authors="Analytical Platform (analytical-platform@digital.justice.gov.uk)" \
