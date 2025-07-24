@@ -1,3 +1,9 @@
 # Ubuntu
 CVE-2024-53140
 CVE-2024-56595
+
+## CVE-2025-22868 (usr/local/bin/cloud-platform, usr/local/bin/kubectl)
+CVE-2025-22868
+
+## CVE-2022-40898 (Python (python-pkg))
+CVE-2022-40898

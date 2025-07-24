@@ -8,7 +8,7 @@ commandTests:
   - name: "code"
     command: "code"
     args: ["--version"]
-    expectedOutput: ["1.101.1"]
+    expectedOutput: ["1.102.2"]
 
 fileExistenceTests:
   - name: "/opt/analytical-platform/first-run-notice.txt"
