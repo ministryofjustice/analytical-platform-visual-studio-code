@@ -7,3 +7,6 @@ CVE-2025-22868
 
 ## CVE-2022-40898 (Python (python-pkg))
 CVE-2022-40898
+
+## AVD-DS-0017 (Trivy misreading due to heredoc structure)
+AVD-DS-0017
