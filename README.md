@@ -1,6 +1,6 @@
 # Analytical Platform Visual Studio Code
 
-[![Ministry of Justice Repository Compliance Badge](https://github-community.service.justice.gov.uk/repository-standards/api/analytical-platform-visual-studio-code/badge)](https://github-community.service.justice.gov.uk/repository-standards/analytical-platform--studio-code)
+[![Ministry of Justice Repository Compliance Badge](https://github-community.service.justice.gov.uk/repository-standards/api/analytical-platform-visual-studio-code/badge)](https://github-community.service.justice.gov.uk/repository-standards/analytical-platform-visual-studio-code)
 
 [![Open in Dev Container](https://raw.githubusercontent.com/ministryofjustice/.devcontainer/refs/heads/main/contrib/badge.svg)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/ministryofjustice/analytical-platform-visual-studio-code)
 
