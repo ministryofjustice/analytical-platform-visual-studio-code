@@ -50,7 +50,7 @@ Releases for Visual Studio Code are published on [GitHub](https://github.com/mic
 curl --silent https://packages.microsoft.com/repos/code/pool/main/c/code/ | grep $(curl --silent https://api.github.com/repos/microsoft/vscode/releases/latest | jq -r .tag_name) | grep amd64
 ```
 
-This will return a string like:
+This will return a string like this for version `1.86.2`:
 
 ```bash
 <a href="code_1.86.2-1707854558_amd64.deb">code_1.86.2-1707854558_amd64.deb</a> ...
