@@ -19,3 +19,7 @@ AVD-DS-0029
 # The host kernel is patched separately by the platform/infrastructure team.
 ## CVE-2025-38666: AppleTalk AARP proxy use-after-free - obsolete protocol, requires kernel module loading (blocked in containers)
 CVE-2025-38666
+
+# Go
+## CVE-2025-63811 (usr/local/bin/aws-sso)
+CVE-2025-63811 exp:2026-01-17
