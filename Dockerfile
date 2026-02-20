@@ -35,6 +35,9 @@ apt-get clean --yes
 rm --force --recursive microsoft.asc packages.microsoft.gpg /var/lib/apt/lists/*
 EOF
 
+# Visual Studio Code Enterprise Policy
+COPY --chown="nobody:nobody" --chmod=0755 src/etc/vscode/policy.json /etc/vscode/policy.json
+
 USER ${CONTAINER_USER}
 WORKDIR /home/${CONTAINER_USER}
 EXPOSE 8080
