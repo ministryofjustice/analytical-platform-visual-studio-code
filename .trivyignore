@@ -3,5 +3,7 @@ AVD-DS-0017 expiry:2026-04-27
 AVD-DS-0029 expiry:2026-04-27
 
 ## Python (python-pkg)
-CVE-2026-23949 expiry:2026-02-26
-CVE-2026-24049 expiry:2026-02-26
+
+
+## linux-libc-dev Ignoring until issue with base image release is fixed
+CVE-2025-37899 expiry:2026-03-06
