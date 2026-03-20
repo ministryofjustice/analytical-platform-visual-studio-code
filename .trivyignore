@@ -7,3 +7,6 @@ AVD-DS-0029 expiry:2026-04-27
 
 ## linux-libc-dev Ignoring until issue with base image release is fixed
 CVE-2025-37899 expiry:2026-03-06
+
+## CVE-2025-15558 (github.com/docker/cli - usr/bin/gh gobinary)
+CVE-2025-15558 expiry: 2026-04-06
