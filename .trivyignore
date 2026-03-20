@@ -5,3 +5,6 @@ AVD-DS-0029 expiry:2026-04-27
 ## Python (python-pkg)
 CVE-2026-23949 expiry:2026-02-26
 CVE-2026-24049 expiry:2026-02-26
+
+## CVE-2025-15558 (github.com/docker/cli - usr/bin/gh gobinary)
+CVE-2025-15558 expiry: 2026-04-06
