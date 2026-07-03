@@ -30,7 +30,7 @@ echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft
 
 apt-get update --yes
 
-apt-get install --yes "code=${VISUAL_STUDIO_CODE_VERSION}" --no-install-recommends
+apt-get install --yes "code-insiders=${VISUAL_STUDIO_CODE_VERSION}" --no-install-recommends
 
 apt-get clean --yes
 
