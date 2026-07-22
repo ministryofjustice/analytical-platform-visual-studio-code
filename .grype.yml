@@ -309,3 +309,17 @@ ignore:
       name: uuid
       location: "/usr/share/code/resources/app/node_modules/uuid/package.json"
     reason: "Bundled in VS Code's app node_modules; fixed upstream in uuid 11.1.1. Requires a newer VS Code release. exp:2026-08-01"
+  - vulnerability: GHSA-395f-4hp3-45gv
+    package:
+      type: npm
+      name: shell-quote
+      version: "1.8.4"
+      location: "/usr/share/code/resources/app/node_modules/shell-quote/package.json"
+    reason: "Bundled directly in VS Code's app node_modules; fixed upstream in shell-quote 1.9.0. Requires a newer VS Code release. exp:2026-08-01"
+  - vulnerability: GHSA-gcfj-64vw-6mp9
+    package:
+      type: npm
+      name: axios
+      version: "1.16.0"
+      location: "/usr/share/code/resources/app/node_modules/axios/package.json"
+    reason: "Bundled directly in VS Code's app node_modules; fixed upstream in axios 1.18.0. Requires a newer VS Code release. exp:2026-08-01"
