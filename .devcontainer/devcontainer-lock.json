@@ -5,6 +5,11 @@
       "resolved": "ghcr.io/devcontainers/features/docker-in-docker@sha256:4fa87399214366e320d489991769c4f3f461e1ffe461f54eea78a41b34945bb5",
       "integrity": "sha256:4fa87399214366e320d489991769c4f3f461e1ffe461f54eea78a41b34945bb5"
     },
+    "ghcr.io/devcontainers/features/docker-in-docker:": {
+      "version": "4.0.0",
+      "resolved": "ghcr.io/devcontainers/features/docker-in-docker@sha256:4fa87399214366e320d489991769c4f3f461e1ffe461f54eea78a41b34945bb5",
+      "integrity": "sha256:4fa87399214366e320d489991769c4f3f461e1ffe461f54eea78a41b34945bb5"
+    },
     "ghcr.io/devcontainers/features/docker-in-docker:2": {
       "version": "2.16.0",
       "resolved": "ghcr.io/devcontainers/features/docker-in-docker@sha256:31ef1bbfde793bcc62c52fa847c02a15fe659d69e48b2d8c1cfbd4db95f97cf7",
@@ -35,3 +40,4 @@
     }
   }
 }
+
