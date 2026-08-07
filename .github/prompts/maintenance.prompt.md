@@ -1,5 +1,5 @@
 ---
-description: "Perform monthly maintenance for this repository: update the cloud base image digest and Visual Studio Code package version, update tests, and complete the manual maintenance Definition of Done"
+description: "Perform monthly maintenance for this repository: update to the latest cloud base image version (tag and digest) and Visual Studio Code package version, update tests, and complete the manual maintenance Definition of Done"
 tools:
   [
     "search/codebase",
@@ -14,6 +14,8 @@ tools:
 
 Perform monthly maintenance for this repository. This image depends on the Analytical Platform Cloud Base Development Image and pins a Visual Studio Code Debian package version. Update both where needed, update the container structure test expectation, and prepare one pull request.
 
+Note: Ubuntu is inherited from the cloud base image, so base image maintenance here means updating this repository to the latest available cloud base image release.
+
 Use the current values from `Dockerfile` and `test/container-structure-test.yml`. Do not assume versions.
 
 ## Prerequisite
@@ -27,7 +29,7 @@ Reminder: this maintenance depends on the Analytical Platform Cloud Base Develop
 
 In one pull request:
 
-1. Update the pinned base image digest in `Dockerfile` for the existing image and tag.
+1. Update the pinned base image in `Dockerfile` to the latest available cloud base image release (tag and digest).
 2. Update `VISUAL_STUDIO_CODE_VERSION` in `Dockerfile` if a newer Debian package version is available.
 3. Update the `code --version` expected output in `test/container-structure-test.yml` when Visual Studio Code is updated.
 4. Keep everything else unchanged.
@@ -47,12 +49,13 @@ In one pull request:
 git checkout -b "chore/maintenance-vscode-$(date +%Y%m%d-%H%M%S)"
 ```
 
-2. Update the base image digest in `Dockerfile`.
+2. Update the base image version in `Dockerfile`.
 
-- Read the current `FROM` image and tag from `Dockerfile`.
-- Use the latest release tag from `ministryofjustice/analytical-platform-cloud-development-environment-base`.
-- Pull for `linux/amd64` and inspect the digest.
-- Update only the digest in the `FROM` line. Keep repository and tag unchanged.
+- Read the current `FROM` image reference from `Dockerfile`.
+- Get the latest release tag from `ministryofjustice/analytical-platform-cloud-development-environment-base`.
+- Pull that latest tag for `linux/amd64` and inspect the digest.
+- Update the `FROM` line to use the latest tag and matching digest.
+- Keep the base image repository unchanged.
 
 Reference commands from the README:
 
@@ -90,30 +93,17 @@ make test
 6. Commit, push, and open a pull request.
 
 - Use a Conventional Commit message with type `build`.
-- Use a clear PR title, for example: `build: update cloud base image digest and Visual Studio Code version`.
+- Use a clear PR title, for example: `build: update cloud base image version and Visual Studio Code version`.
 - Include a concise PR summary of changed versions.
-
-## Pull Request Checklist
-
-Include this checklist in the PR description and complete each item:
-
-### Definition of Done
-
-Since this image relies on the Analytical Platform Cloud Base Development Image, ensure that maintenance issue is completed first.
-
-- [ ] Merge any open Dependabot pull requests in the Visual Studio Code repository.
-- [ ] Update the Visual Studio Code version if required.
-- [ ] Create a new release in this repository.
-- [ ] Update guidance if required: https://user-guidance.analytical-platform.service.justice.gov.uk/tools/visual-studio-code/#visual-studio-code
-- [ ] Create a new release in development: https://controlpanel.services.dev.analytical-platform.service.justice.gov.uk/releases/
-- [ ] Test deployment in development.
-- [ ] Create a new release in production: https://controlpanel.services.analytical-platform.service.justice.gov.uk/releases/
-- [ ] Test deployment in production.
 
 ## Guardrails
 
+- Update to the latest available release of `ghcr.io/ministryofjustice/analytical-platform-cloud-development-environment-base`.
+- Update both base image tag and digest together in `FROM`.
 - Keep platform aligned to `linux/amd64` for digest checks.
-- Do not change the base image repository or tag in `FROM`; update only digest.
+- Keep the base image repository unchanged.
 - Do not change unrelated Dockerfile content.
 - Do not update `test/container-structure-test.yml` unless Visual Studio Code version changed.
-- Keep all maintenance updates in a single branch and a single pull request.
+- Deliver all updates in the same branch and pull request.
+- Use [Conventional Commits](https://www.conventionalcommits.org/) for both the commit message and the PR title (use the `build` type).
+
