@@ -84,17 +84,36 @@ curl --silent https://packages.microsoft.com/repos/code/pool/main/c/code/ | grep
 - In `test/container-structure-test.yml`, update the `commandTests` entry for `code --version`.
 - The expected output should contain only the semantic version part (for example `1.110.1`), not the Debian build suffix.
 
-5. Validate changes.
-
-```bash
-make test
-```
-
-6. Commit, push, and open a pull request.
+5. Commit, push, and open a pull request.
 
 - Use a Conventional Commit message with type `build`.
 - Use a clear PR title, for example: `build: update cloud base image version and Visual Studio Code version`.
-- Include a concise PR summary of changed versions.
+- Create the PR description using the structure below.
+
+Use this PR description template (replace placeholders with actual values):
+
+```markdown
+## Summary
+Updates pinned Visual Studio Code dependencies in `Dockerfile` and aligns the version assertion in `test/container-structure-test.yml`.
+
+### Base image
+- `ghcr.io/ministryofjustice/analytical-platform-cloud-development-environment-base:<tag>` digest is already up to date.
+- No base image change in this PR.
+
+### Visual Studio Code
+| Item | Before | After |
+| --- | --- | --- |
+| `VISUAL_STUDIO_CODE_VERSION` | `<old-deb-version>` | `<new-deb-version>` |
+| `code --version` expected output | `<old-semver>` | `<new-semver>` |
+```
+
+When base image does change in the PR, replace the `### Base image` section with:
+
+```markdown
+### Base image
+- `ghcr.io/ministryofjustice/analytical-platform-cloud-development-environment-base:<old-tag>` -> `ghcr.io/ministryofjustice/analytical-platform-cloud-development-environment-base:<new-tag>`
+- Digest: `sha256:<old-digest>` -> `sha256:<new-digest>`
+```
 
 ## Guardrails
 
