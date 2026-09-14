@@ -51,6 +51,11 @@ ignore:
   - vulnerability: CVE-2026-33845
     reason: "libgnutls30t64 fix 3.8.3-1.1ubuntu3.6 is not currently available in apt sources for this build environment. exp:2026-07-31"
 
+  # .NET 10 runtime packages in the shared base image still carry a high-severity advisory.
+  # No patched package is available from the configured sources yet, so this is handled the same way as other upstream-only suppressions.
+  - vulnerability: CVE-2026-69806
+    reason: "Detected in .NET 10 runtime packages from the upstream base image; no fixed package is available in the configured package sources. exp:2026-10-31"
+
   # Miniconda-managed binaries: py312 track is already at latest installer in this Dockerfile.
   - vulnerability: CVE-2026-6100
     reason: "Detected in /opt/conda/bin/python3.12; Miniconda py312 installer is already at latest available version in this repo. exp:2026-07-31"
