@@ -51,6 +51,35 @@ ignore:
   - vulnerability: CVE-2026-33845
     reason: "libgnutls30t64 fix 3.8.3-1.1ubuntu3.6 is not currently available in apt sources for this build environment. exp:2026-07-31"
 
+  # Ubuntu package advisories in the base image that are already patched upstream in newer Ubuntu releases,
+  # but the fixed package versions are not yet available in the configured sources for this build environment.
+  - vulnerability: CVE-2026-58016
+    reason: "glib2.0 packages (gir1.2-glib-2.0, libglib2.0-0t64, libglib2.0-data) remain on 2.80.0-6ubuntu3.8 in the current image; fixed 2.80.0-6ubuntu3.9 is not yet in configured apt sources. exp:2026-10-31"
+  - vulnerability: CVE-2025-59375
+    reason: "libexpat1 and libexpat1-dev remain on 2.6.1-2ubuntu0.4 in the current image; fixed 2.6.1-2ubuntu0.5 is not yet in configured apt sources. exp:2026-10-31"
+  - vulnerability: CVE-2026-58015
+    reason: "glib2.0 packages (gir1.2-glib-2.0, libglib2.0-0t64, libglib2.0-data) remain on 2.80.0-6ubuntu3.8 in the current image; fixed 2.80.0-6ubuntu3.9 is not yet in configured apt sources. exp:2026-10-31"
+  - vulnerability: CVE-2026-58013
+    reason: "glib2.0 packages (gir1.2-glib-2.0, libglib2.0-0t64, libglib2.0-data) remain on 2.80.0-6ubuntu3.8 in the current image; fixed 2.80.0-6ubuntu3.9 is not yet in configured apt sources. exp:2026-10-31"
+  - vulnerability: CVE-2026-58010
+    reason: "glib2.0 packages (gir1.2-glib-2.0, libglib2.0-0t64, libglib2.0-data) remain on 2.80.0-6ubuntu3.8 in the current image; fixed 2.80.0-6ubuntu3.9 is not yet in configured apt sources. exp:2026-10-31"
+  - vulnerability: CVE-2026-58012
+    reason: "glib2.0 packages (gir1.2-glib-2.0, libglib2.0-0t64, libglib2.0-data) remain on 2.80.0-6ubuntu3.8 in the current image; fixed 2.80.0-6ubuntu3.9 is not yet in configured apt sources. exp:2026-10-31"
+  - vulnerability: CVE-2026-58011
+    reason: "glib2.0 packages (gir1.2-glib-2.0, libglib2.0-0t64, libglib2.0-data) remain on 2.80.0-6ubuntu3.8 in the current image; fixed 2.80.0-6ubuntu3.9 is not yet in configured apt sources. exp:2026-10-31"
+  - vulnerability: CVE-2026-45186
+    reason: "libexpat1 and libexpat1-dev remain on 2.6.1-2ubuntu0.4 in the current image; fixed 2.6.1-2ubuntu0.5 is not yet in configured apt sources. exp:2026-10-31"
+  - vulnerability: CVE-2026-58014
+    reason: "glib2.0 packages (gir1.2-glib-2.0, libglib2.0-0t64, libglib2.0-data) remain on 2.80.0-6ubuntu3.8 in the current image; fixed 2.80.0-6ubuntu3.9 is not yet in configured apt sources. exp:2026-10-31"
+  - vulnerability: CVE-2026-41080
+    reason: "libexpat1 and libexpat1-dev remain on 2.6.1-2ubuntu0.4 in the current image; fixed 2.6.1-2ubuntu0.5 is not yet in configured apt sources. exp:2026-10-31"
+  - vulnerability: CVE-2026-74860
+    reason: "libxml2 and libxml2-dev remain on 2.9.14+dfsg-1.3ubuntu3.8 in the current image; fixed 2.9.14+dfsg-1.3ubuntu3.9 is not yet in configured apt sources. exp:2026-10-31"
+  - vulnerability: CVE-2026-16118
+    reason: "glib2.0 packages (gir1.2-glib-2.0, libglib2.0-0t64, libglib2.0-data) remain on 2.80.0-6ubuntu3.8 in the current image; fixed 2.80.0-6ubuntu3.9 is not yet in configured apt sources. exp:2026-10-31"
+  - vulnerability: CVE-2026-86140
+    reason: "libxml2 and libxml2-dev remain on 2.9.14+dfsg-1.3ubuntu3.8 in the current image; fixed 2.9.14+dfsg-1.3ubuntu3.9 is not yet in configured apt sources. exp:2026-10-31"
+
   # .NET 10 runtime packages in the shared base image still carry a high-severity advisory.
   # No patched package is available from the configured sources yet, so this is handled the same way as other upstream-only suppressions.
   - vulnerability: CVE-2026-69806
