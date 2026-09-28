@@ -30,6 +30,14 @@ apt-get update --yes
 
 apt-get install --yes "code=${VISUAL_STUDIO_CODE_VERSION}" --no-install-recommends
 
+# Security fixes pending base image update:
+# CVE-2026-5917 (libgit2), CVE-2026-66046, CVE-2026-76641, CVE-2026-76957 (expat)
+apt-get install --yes --only-upgrade \
+  libgit2-1.7 \
+  libgit2-dev \
+  libexpat1 \
+  libexpat1-dev
+
 apt-get clean --yes
 
 rm --force --recursive microsoft.asc packages.microsoft.gpg /var/lib/apt/lists/*
