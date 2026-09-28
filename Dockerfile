@@ -32,11 +32,11 @@ apt-get install --yes "code=${VISUAL_STUDIO_CODE_VERSION}" --no-install-recommen
 
 # Security fixes pending base image update:
 # CVE-2026-5917 (libgit2), CVE-2026-66046, CVE-2026-76641, CVE-2026-76957 (expat)
-apt-get install --yes --only-upgrade \
-  libgit2-1.7 \
-  libgit2-dev \
-  libexpat1 \
-  libexpat1-dev
+apt-get install --yes --no-install-recommends \
+  "libgit2-1.7=1.7.2+ds-1ubuntu3.2" \
+  "libgit2-dev=1.7.2+ds-1ubuntu3.2" \
+  "libexpat1=2.6.1-2ubuntu0.6" \
+  "libexpat1-dev=2.6.1-2ubuntu0.6"
 
 apt-get clean --yes
 
