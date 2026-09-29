@@ -1,4 +1,4 @@
-FROM ghcr.io/ministryofjustice/analytical-platform-cloud-development-environment-base:1.49.0@sha256:df8bf18f240124a82e0d8214ec2307831bf1cbf2c4e7632024450a8a01f041c0
+FROM ghcr.io/ministryofjustice/analytical-platform-cloud-development-environment-base:1.50.0@sha256:21b4f9310d9f7edddb8349d198d1f18d0bdf4e4f6b47acb61237409b94bf58d9
 LABEL org.opencontainers.image.vendor="Ministry of Justice" \
       org.opencontainers.image.authors="Analytical Platform (analytical-platform@digital.justice.gov.uk)" \
       org.opencontainers.image.title="Visual Studio Code" \
@@ -30,13 +30,6 @@ apt-get update --yes
 
 apt-get install --yes "code=${VISUAL_STUDIO_CODE_VERSION}" --no-install-recommends
 
-# Security fixes pending base image update:
-# CVE-2026-5917 (libgit2), CVE-2026-66046, CVE-2026-76641, CVE-2026-76957 (expat)
-apt-get install --yes --no-install-recommends \
-  "libgit2-1.7=1.7.2+ds-1ubuntu3.2" \
-  "libgit2-dev=1.7.2+ds-1ubuntu3.2" \
-  "libexpat1=2.6.1-2ubuntu0.6" \
-  "libexpat1-dev=2.6.1-2ubuntu0.6"
 
 apt-get clean --yes
 
