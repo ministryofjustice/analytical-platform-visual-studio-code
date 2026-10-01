@@ -288,6 +288,23 @@ ignore:
   - vulnerability: GO-2026-5066-golang.org/x/image
     reason: "Detected in upstream precompiled tooling or transitive Go modules; fix requires upstream releases. exp:2026-08-01"
 
+  # urllib3 vulnerability in the inherited Python environment.
+  # Fixed upstream in urllib3 2.8.0; requires a newer cloud base image release.
+  - vulnerability: GHSA-vxq7-64xx-v4gw
+    package:
+      type: python
+      name: urllib3
+      version: "2.7.0"
+      location: "/opt/conda/lib/python3.12/site-packages/urllib3-2.7.0.dist-info/METADATA"
+    reason: "Detected in the inherited Python environment; fixed upstream in urllib3 2.8.0. Requires a newer cloud base image release."
+  - vulnerability: GHSA-8988-9cw3-xx77
+    package:
+      type: python
+      name: urllib3
+      version: "2.7.0"
+      location: "/opt/conda/lib/python3.12/site-packages/urllib3-2.7.0.dist-info/METADATA"
+    reason: "Detected in the inherited Python environment; fixed upstream in urllib3 2.8.0. Requires a newer cloud base image release."
+
   # VS Code bundled application dependencies (resources/app/node_modules).
   # Shipped as part of the Microsoft `code` .deb package; not part of this
   # repo's own dependency tree. Only a newer upstream VS Code release (or
