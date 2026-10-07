@@ -388,7 +388,6 @@ ignore:
       version: "10.2.0"
       location: "/usr/share/code/resources/app/node_modules/ip-address/package.json"
     reason: "Bundled directly in VS Code's app node_modules; fixed upstream in ip-address 10.3.1. Requires a newer VS Code release. exp:2026-08-01"
-
   - vulnerability: GHSA-pqg4-j6r4-53mv
     package:
       type: npm
@@ -396,4 +395,3 @@ ignore:
       version: "1.10.0"
       location: "/usr/share/code/resources/app/node_modules/shell-quote/package.json"
     reason: "Bundled directly in VS Code's app node_modules (code 1.140.0-1790759618); fixed upstream in shell-quote 1.11.0. Requires a newer VS Code release. exp:2026-11-07"
-
