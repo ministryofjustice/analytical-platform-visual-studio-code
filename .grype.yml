@@ -394,4 +394,4 @@ ignore:
       name: shell-quote
       version: "1.10.0"
       location: "/usr/share/code/resources/app/node_modules/shell-quote/package.json"
-    reason: "Bundled directly in VS Code's app node_modules (code 1.140.0-1790759618); fixed upstream in shell-quote 1.11.0. Requires a newer VS Code release. exp:2026-11-07"
+    reason: "Bundled directly in VS Code's app node_modules (code 1.141.1-1791833136); fixed upstream in shell-quote 1.11.0. Requires a newer VS Code release. exp:2026-11-07"
