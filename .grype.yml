@@ -85,6 +85,33 @@ ignore:
   - vulnerability: CVE-2026-69806
     reason: "Detected in .NET 10 runtime packages from the upstream base image; no fixed package is available in the configured package sources. exp:2026-10-31"
 
+  # .NET 10 SDK dependency findings inherited from the shared base image.
+  # Fixed in package version 10.0.13; awaiting an upstream base image update.
+  - vulnerability: GHSA-846f-f764-76mx
+    package:
+      type: dotnet
+      name: System.Security.Cryptography.Pkcs
+      version: "10.0.12"
+    reason: ".NET 10 SDK dependency in the inherited base image; fixed upstream in 10.0.13. exp:2026-10-31"
+  - vulnerability: GHSA-7hqp-7c5m-4vq6
+    package:
+      type: dotnet
+      name: System.Security.Cryptography.Xml
+      version: "10.0.12"
+    reason: ".NET 10 SDK dependency in the inherited base image; fixed upstream in 10.0.13. exp:2026-10-31"
+  - vulnerability: GHSA-c399-9853-6jmj
+    package:
+      type: dotnet
+      name: System.Security.Cryptography.Xml
+      version: "10.0.12"
+    reason: ".NET 10 SDK dependency in the inherited base image; fixed upstream in 10.0.13. exp:2026-10-31"
+  - vulnerability: GHSA-r955-8q5j-3h83
+    package:
+      type: dotnet
+      name: System.Security.Cryptography.Xml
+      version: "10.0.12"
+    reason: ".NET 10 SDK dependency in the inherited base image; fixed upstream in 10.0.13. exp:2026-10-31"
+
   # Miniconda-managed binaries: py312 track is already at latest installer in this Dockerfile.
   - vulnerability: CVE-2026-6100
     reason: "Detected in /opt/conda/bin/python3.12; Miniconda py312 installer is already at latest available version in this repo. exp:2026-07-31"
