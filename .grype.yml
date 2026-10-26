@@ -429,3 +429,10 @@ ignore:
       version: "3.25.76"
       location: "/usr/share/code/resources/app/node_modules/@vscode/sandbox-runtime/node_modules/zod/package.json"
     reason: "Bundled zod v3 copy vendored under @vscode/sandbox-runtime (code 1.142.0-1792035033); fixed upstream only in zod 4.6.6 (major version jump, no upstream 3.x fix), so cannot be patched in place safely. Requires a newer VS Code release. exp:2026-11-30"
+  - vulnerability: GHSA-mrhx-c7xc-m3w5
+    package:
+      type: npm
+      name: zod
+      version: "4.4.3"
+      location: "/usr/share/code/resources/app/node_modules/zod/package.json"
+    reason: "Bundled directly in VS Code's app node_modules (code 1.142.0-1792035033); fixed upstream in zod 4.6.6. Requires a newer VS Code release. exp:2026-11-30"
