@@ -436,3 +436,11 @@ ignore:
       version: "4.4.3"
       location: "/usr/share/code/resources/app/node_modules/zod/package.json"
     reason: "Bundled directly in VS Code's app node_modules (code 1.142.0-1792035033); fixed upstream in zod 4.6.6. Requires a newer VS Code release. exp:2026-11-30"
+
+  - vulnerability: GHSA-846f-f764-76mx
+    package:
+      type: dotnet
+      name: System.Security.Cryptography.Pkcs
+      version: "9.0.5"
+      location: "/usr/share/code/resources/app/node_modules.asar.unpacked/@vscode/vsce-sign/bin/vsce-sign"
+    reason: "Compiled into VS Code's self-contained vsce-sign binary (code 1.145.0-1793749366), used for extension signature verification; fixed upstream in System.Security.Cryptography.Pkcs 9.0.21. Cannot be patched in place; requires a newer VS Code release shipping a rebuilt vsce-sign. exp:2026-12-04"
