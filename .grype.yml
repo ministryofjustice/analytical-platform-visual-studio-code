@@ -107,33 +107,3 @@ ignore:
       version: "9.0.5"
       location: "/usr/share/code/resources/app/node_modules.asar.unpacked/@vscode/vsce-sign/bin/vsce-sign"
     reason: "Compiled into VS Code's self-contained vsce-sign binary (code 1.145.0-1793749366), used for extension signature verification; fixed upstream in System.Security.Cryptography.Pkcs 9.0.21. Cannot be patched in place; requires a newer VS Code release shipping a rebuilt vsce-sign. exp:2026-12-04"
-  # .NET 10 runtime/ASP.NET Core packages (10.0.13) inherited from the shared base image.
-  # Fixed upstream in 10.0.15; awaiting an analytical-platform-cloud-development-environment-base release.
-  - vulnerability: GHSA-x33c-w48q-qrgc
-    package:
-      type: dotnet
-      name: Microsoft.AspNetCore.App.Runtime.linux-x64
-      version: "10.0.13"
-      location: "/usr/lib/dotnet/shared/Microsoft.AspNetCore.App/10.0.13/Microsoft.AspNetCore.App.deps.json"
-    reason: "ASP.NET Core runtime in the inherited base image (base 1.66.0); fixed upstream in 10.0.15. Requires a newer base image release. exp:2026-12-11"
-  - vulnerability: GHSA-x33c-w48q-qrgc
-    package:
-      type: dotnet
-      name: Microsoft.AspNetCore.WebUtilities
-      version: "10.0.13"
-      location: "/usr/lib/dotnet/packs/Microsoft.AspNetCore.App.Ref/10.0.13/ref/net10.0/Microsoft.AspNetCore.WebUtilities.dll"
-    reason: "ASP.NET Core reference pack in the inherited base image (base 1.66.0); fixed upstream in 10.0.15. Requires a newer base image release. exp:2026-12-11"
-  - vulnerability: GHSA-3g4v-f5gv-c7xf
-    package:
-      type: dotnet
-      name: Microsoft.NETCore.App.Runtime.linux-x64
-      version: "10.0.13"
-      location: "/usr/lib/dotnet/shared/Microsoft.NETCore.App/10.0.13/Microsoft.NETCore.App.deps.json"
-    reason: ".NET runtime in the inherited base image (base 1.66.0); fixed upstream in 10.0.15. Requires a newer base image release. exp:2026-12-11"
-  - vulnerability: GHSA-vmv3-wvjp-wqpj
-    package:
-      type: dotnet
-      name: System.Formats.Cbor
-      version: "10.0.13"
-      location: "/usr/lib/dotnet/packs/Microsoft.AspNetCore.App.Ref/10.0.13/ref/net10.0/System.Formats.Cbor.dll"
-    reason: "ASP.NET Core reference pack in the inherited base image (base 1.66.0); fixed upstream in 10.0.15. Requires a newer base image release. exp:2026-12-11"
